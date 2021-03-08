@@ -2,9 +2,11 @@
 
      fxFlex="none"
      
-     fxLayout="column">
+     fxLayout="column"
 
-     <img *ngIf="image" [src]="image" [alt]="name">
+     fxLayoutAlign="center center"
+     
+     [ngStyle]="{'background-image': 'url(' + image + ')'}">
 
      <i class="fa fa-store" *ngIf="!image"></i>
 
@@ -14,7 +16,9 @@
 
      fxFlex 
      
-     fxLayout="column">
+     fxLayout="column" 
+     
+     fxLayoutAlign="center start">
 
      <span [innerHTML]="name"></span>
 
@@ -22,7 +26,7 @@
 
 <div class="price" 
 
-     fxFlex 
+     fxFlex="none"
      
      fxLayout="column"
      

@@ -30,7 +30,7 @@ import { QueryService }			from '@services/Query.service';
 
 export class StoreFrontComponent implements OnInit {
 
-	public order?:			IOrder;
+	public cartOrder?:		IOrder;
 
 	public products:		IProduct[]	= [];
 
@@ -48,7 +48,7 @@ export class StoreFrontComponent implements OnInit {
 
 		await this.setUser();
 
-		this.setOrder();
+		this.setCartOrder();
 
 		this.setRecommendeds();
 
@@ -56,20 +56,81 @@ export class StoreFrontComponent implements OnInit {
 
 	}
 
-	public async setOrder(): Promise<void> {
-		
-		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/carts/' + this.user!.id);
+	public async getCartOrder(): Promise<IOrder> {
 
-		this.order			= dataProducts.response.body;
+		const dataOrder	= await this._queryService.callRest('GET', 'http://localhost:8080/carts/' + this.user!.id);
+
+		return dataOrder.response.body;
+
+	}
+
+	public getMultiProductIdQueryString(order: IOrder): string {
+
+		let multiProductIdQueryString	= '';
+
+		for (let product of order.products)
+
+			multiProductIdQueryString += 'id=' + product.id + '&&';
+
+		return (multiProductIdQueryString !== '') ? 
+		
+			multiProductIdQueryString.substring(0, multiProductIdQueryString.length-2) : '';
+
+	}
+
+	public getProductIdMap(products: IProduct[]): { [key: number]: IProduct } {
+
+		const productIdMap: { [key: number]: IProduct }	= {};
+
+		for (let product of products) productIdMap[product.id] = product;
+
+		return productIdMap;
+
+	}
+
+	public mergeOrderProductsWithProducts(order: IOrder, products: IProduct[]): IOrder {
+
+		const orderProducts	= [];
+
+		const productIdMap	= this.getProductIdMap(products);
+		
+		for (let product of order.products)
+
+			if (productIdMap[product.id])
+
+				orderProducts.push({...product, ...productIdMap[product.id]});
+
+		order.products		= [...orderProducts];
+
+		return order;
+
+	}
+
+	public async searchProducts(queryString: string): Promise<IProduct[]> {
+
+		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products/?' + queryString);
+
+		return dataProducts.response.body;
+	}
+
+	public async setCartOrder(): Promise<void> {
+		
+		const order			= await this.getCartOrder();
+
+		const multiProductIdQueryString	= this.getMultiProductIdQueryString(order);
+
+		const dataProducts	= await this.searchProducts(multiProductIdQueryString);
+
+		this.cartOrder		= this.mergeOrderProductsWithProducts(order, dataProducts);
 
 	}
 	
 
 	public async setProducts(): Promise<void> {
+		console.log(await this._queryService.callRest('GET', 'http://localhost:8080/products?id=1&&2'));
+		//const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products');
 
-		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products');
-
-		this.products		= [...dataProducts.response.body];
+		this.products		= []; //[...dataProducts.response.body];
 
 	}
 

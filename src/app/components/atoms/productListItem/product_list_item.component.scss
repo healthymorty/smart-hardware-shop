@@ -1,19 +1,17 @@
 @import '../../../styling/mixins.scss';
 
-:host(checkbox) {
-	cursor: pointer;
-	margin: 0 8px 0 0;
-	.checkbox {
-		background-color: $inputBgColor;
-		border-radius: 50%;
-		box-shadow:  0 0 2px rgba(0, 0, 0, 0.2) inset;
-		height: 16px;
-		width: 16px;
-		&.selected {
-			background-color: $active;
-		}
+:host(product-list-item) {
+	padding: 8px;
+	.product-image {
+		background-size: cover;
+		background-repeat: no-repeat;
+		border-radius: 4px;
+		height: 40px;
+		overflow: hidden;
+		width: 40px;
 	}
-	label {
-		padding: 0 0 0 4px;
+	.name {
+		height: 100%;
+		padding: 0 8px;
 	}
 }

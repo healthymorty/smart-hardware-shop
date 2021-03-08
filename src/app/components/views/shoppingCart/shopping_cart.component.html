@@ -1,4 +1,10 @@
-<div class="title" fxFlex fxLayout="row">
+<div class="title" 
+
+	 fxFlex="none" 
+	  
+	 fxLayout="row"
+	 
+	 fxLayoutAlign="center center">
 
 	<h2>Shopping Cart</h2>
 
@@ -12,7 +18,7 @@
 	 
 	 *ngIf="order">
 
-	 <product-list-item fxFlex 
+	 <product-list-item fxFlex="none" 
 	 
 	 					fxLayour="row"
 
@@ -20,14 +26,16 @@
 						 
 						[name]="product.name"
 						
-						[image]="product.image"
+						[image]="product.defaultImage"
 						
 						[price]="product.price"></product-list-item>
 	
 </div>
 
-<product-list-item fxFlex 
+<product-list-item fxFlex="none" 
 	
 				   fxLayour="row"
+
+				   [name]="'Total'"
 					
 				   [price]="total"></product-list-item>

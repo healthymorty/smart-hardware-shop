@@ -1,5 +1,16 @@
 @import '../../../styling/mixins.scss';
 
 :host(shopping-cart) {
-	
+    .title {
+        height: 60px;
+        h2 {
+            font-size: 24px;
+            font-weight: $font-weight-bold;
+        }
+    }
+    .products-list {
+        padding: 8px 16px;
+        product-list-item {
+        }
+    }
 }

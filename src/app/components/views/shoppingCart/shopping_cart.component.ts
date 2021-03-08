@@ -21,7 +21,7 @@ export class ShoppingCartComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit() {
-
+		console.log(this.order);
 		this.setTotal();
 
 	}
