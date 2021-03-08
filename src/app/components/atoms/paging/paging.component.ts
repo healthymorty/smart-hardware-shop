@@ -50,13 +50,25 @@ export class PagingComponent {
 
 		this._totalItems	= totalItems;
 
-		if (totalItems != null && this.initiated)	this.setPageSetMap();
+		this.setPageSetMap();
 
 	};
 
 	@Output() page:	EventEmitter<number> = new EventEmitter<number>();
 
 	public initiated		= false;
+
+	get lastPageNum(): number | undefined {
+
+		console.log(this.pageSetMap);
+		console.log('this.lastPageSetNum!: ' + this.lastPageSetNum!);
+		console.log(this.pageSetMap![this.lastPageSetNum!]);
+		console.log(this.pageSetMap![this.lastPageSetNum!][this.pageSetMap![this.lastPageSetNum!].length - 1]);
+		return (this.pageSetMap && Object.keys(this.pageSetMap).length > 0) ?
+
+			this.pageSetMap[this.lastPageSetNum!][this.pageSetMap[this.lastPageSetNum!].length - 1] : undefined
+
+	}
 
 	public lastPageSetNum?:	number;	
 
@@ -69,8 +81,6 @@ export class PagingComponent {
 	public pageSetSize		= 5;
 
 	public range?:			string;
-
-	
 
 	constructor(
 
@@ -86,7 +96,7 @@ export class PagingComponent {
 
 				+this._URLManagerService.getQueryParam('page') : 1;
 
-		this.setPageSetMap();
+		//this.setPageSetMap();
 
 		this.initiated	= true;
 
@@ -149,7 +159,7 @@ export class PagingComponent {
 	}
 
 	public setPageSetMap(): void {
-		
+
 		const numberOfPages		= Math.ceil(this.totalItems! / this.pageSize);
 
 		this.numberOfPageSets	= Math.ceil(numberOfPages / this.pageSetSize);
@@ -187,8 +197,11 @@ export class PagingComponent {
 	public setRange(): void {
 
 		const pageCount	= this.pageNum! * this.pageSize;
-
-		this.range		= (pageCount + 1 - this.pageSize) + ' - ' + pageCount;
+		console.log('this.lastPageNum: ' + this.lastPageNum);
+		console.log('this.pageNum: ' + this.pageNum);
+		const endpoint	= (this.lastPageNum === this.pageNum) ? this.totalItems : pageCount;
+		console.log('endpoint: ' + endpoint);
+		this.range		= (pageCount + 1 - this.pageSize) + ' - ' + endpoint;
 
 	}
 

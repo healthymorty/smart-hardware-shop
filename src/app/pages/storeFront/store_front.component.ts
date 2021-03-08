@@ -279,7 +279,7 @@ export class StoreFrontComponent implements OnInit {
 
 	public setQuerysTotalRowCount(pageNum: number, HeadersXTotalCount: number): void {
 
-		if (pageNum === 1) this.querysTotalRowCount	= HeadersXTotalCount;
+		if (!this.querysTotalRowCount) this.querysTotalRowCount	= HeadersXTotalCount;
 
 	}
 

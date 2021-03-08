@@ -89,6 +89,8 @@
 							  [name]="product.name"
 							  
 							  [price]="product.price"
+
+							  [quantity]="(cartOrderProductIDMap && cartOrderProductIDMap![product.id]) ? cartOrderProductIDMap![product.id].quantity : null"
 							  							  
 							  (quantityUpdated)="onQuantityUpdated(productCardComp)"></product-card>
 

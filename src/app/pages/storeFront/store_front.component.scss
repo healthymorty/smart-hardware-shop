@@ -8,23 +8,23 @@
 	position: relative;
 	width: 100%;
     .nav-bar {
-        border: 1px solid red;
+        //border: 1px solid red;
         height: 60px;
     }
     .main-content-container {
-        border: 1px solid red;
+        //border: 1px solid red;
         .left-menu-panel {
-            border: 1px solid red;
+            //border: 1px solid red;
             
         }
         .middle-panel {
-            border: 1px solid red;
+            //border: 1px solid red;
             .banner {
-                border: 1px solid red;
+                //border: 1px solid red;
                 height: 200px;
             }
             .filter-bar {
-                border: 1px solid red;
+                //border: 1px solid red;
                 height: 40px;
                 padding: 0 0 0 16px;
                 position: relative;
@@ -35,7 +35,7 @@
                 }
             }
             .product-list-view{
-                border: 1px solid red;
+                //border: 1px solid red;
                 overflow-y: scroll;
                 overflow-x: hidden;
                 padding: 16px 0 16px 16px;
@@ -47,6 +47,6 @@
         }
     }
     .right-menu-panel {
-        border: 1px solid red;
+        //border: 1px solid red;
     }
 }
