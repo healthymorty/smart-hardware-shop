@@ -34,7 +34,7 @@ export class ProductCardComponent {
 
 	get quantity(): number {
 
-		return (this.addToCartComp!) ? this.addToCartComp?.quantity : this._quantity!;
+		return (this.addToCartComp!) ? this.addToCartComp!.quantity : this._quantity!;
 
 	}
 

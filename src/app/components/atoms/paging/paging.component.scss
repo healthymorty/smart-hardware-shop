@@ -29,11 +29,13 @@
 	}
 	.page-list {
 		.page {
+			border-radius: 4px;
 			cursor: pointer;
 			height: 40px;
    			width: 40px;
 			   &.selected, &:hover {
 				   background-color: $selected;
+				   color: #fff;
 			   }
 		}
 	}
