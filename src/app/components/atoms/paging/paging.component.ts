@@ -60,10 +60,6 @@ export class PagingComponent {
 
 	get lastPageNum(): number | undefined {
 
-		console.log(this.pageSetMap);
-		console.log('this.lastPageSetNum!: ' + this.lastPageSetNum!);
-		console.log(this.pageSetMap![this.lastPageSetNum!]);
-		console.log(this.pageSetMap![this.lastPageSetNum!][this.pageSetMap![this.lastPageSetNum!].length - 1]);
 		return (this.pageSetMap && Object.keys(this.pageSetMap).length > 0) ?
 
 			this.pageSetMap[this.lastPageSetNum!][this.pageSetMap[this.lastPageSetNum!].length - 1] : undefined
@@ -197,10 +193,9 @@ export class PagingComponent {
 	public setRange(): void {
 
 		const pageCount	= this.pageNum! * this.pageSize;
-		console.log('this.lastPageNum: ' + this.lastPageNum);
-		console.log('this.pageNum: ' + this.pageNum);
+
 		const endpoint	= (this.lastPageNum === this.pageNum) ? this.totalItems : pageCount;
-		console.log('endpoint: ' + endpoint);
+
 		this.range		= (pageCount + 1 - this.pageSize) + ' - ' + endpoint;
 
 	}

@@ -35,9 +35,9 @@ export class AddeToCartComponent implements OnInit {
 	ngOnInit(): void {}
 
 	public onAdd(): void {
-		console.log(this.quantity);
+
 		this.quantity	+= 1;
-		console.log(this.quantity);
+
 		this.quantityUpdated.emit(this.quantity);
 		
 	}
