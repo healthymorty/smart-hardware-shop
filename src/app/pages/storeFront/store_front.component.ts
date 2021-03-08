@@ -52,6 +52,8 @@ export class StoreFrontComponent implements OnInit {
 
 	public cartOrder?:		IOrder;
 
+	public cartOrderProductIDMap?: { [key: number]: IProduct }	 = {};
+
 	public page				= new Paging(this.getNewPage.bind(this));
 
 	public products?:		IProduct[];
@@ -98,11 +100,25 @@ export class StoreFrontComponent implements OnInit {
 
 		await this.setUser();
 
-		this.setCartOrder();
+		await this.setCartOrder();
+
+		this.setCartOrderMap();
 
 		this.setRecommendeds();
 
 		this.onPage();
+
+	}
+
+	public addItemToCart(productCardComp: ProductCardComponent): void {
+
+		if (!this.cartOrderProductIDMap![productCardComp.id!]) {
+			
+			this.cartOrderProductIDMap![productCardComp.id!]	= productCardComp.product;
+
+			this.cartOrder?.products.push(this.cartOrderProductIDMap![productCardComp.id!]);
+
+		}
 
 	}
 
@@ -181,12 +197,6 @@ export class StoreFrontComponent implements OnInit {
 
 	}
 
-	public onAddItemToCart(productCardComp: ProductCardComponent): void {
-
-		this.cartOrder?.products.push(productCardComp.product);
-
-	}
-
 	public async onPage(pageNum = this.pageNum): Promise<void> {
 
 		this.updatePagingComp(pageNum);
@@ -200,6 +210,16 @@ export class StoreFrontComponent implements OnInit {
 			this.products	= [...dataProducts];
 
 		}, 0);	
+
+	}
+
+	public onQuantityUpdated(productCardComp: ProductCardComponent): void {
+
+		if (!this.cartOrderProductIDMap![productCardComp.id!])
+
+			this.addItemToCart(productCardComp);
+
+		this.cartOrderProductIDMap![productCardComp.id!].quantity	= productCardComp.quantity;
 
 	}
 
@@ -232,6 +252,20 @@ export class StoreFrontComponent implements OnInit {
 		const dataProducts	= await this.getSpecificProducts(multiProductIdQueryString);
 
 		this.cartOrder		= this.mergeOrderProductsWithProducts(order, dataProducts);
+
+	}
+
+	public setCartOrderMap(): void {
+
+		const cartOrderProductIDMap: { [key: number]: IProduct } = {};
+
+		if (this.cartOrder && this.cartOrder.products.length > 0)
+
+			for (let product of this.cartOrder.products)
+
+				cartOrderProductIDMap[product.id] = product;
+
+		this.cartOrderProductIDMap = {...cartOrderProductIDMap};
 
 	}
 

@@ -2,6 +2,8 @@ export {
 
 	/* Atoms */
 
+	AddeToCartComponent,
+
 	CheckboxComponent,
 
 	InputComponent,

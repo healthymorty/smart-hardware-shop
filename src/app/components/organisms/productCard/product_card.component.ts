@@ -1,5 +1,7 @@
 import { Component, EventEmitter, HostListener, Inject, Input, Output, ViewChild }		from '@angular/core';
 
+import { AddeToCartComponent } from '@atoms/addToCart/add_to_cart.component';
+
 import { IProduct }	from '@interfaces/Product.interface'; 
 
 @Component({
@@ -28,9 +30,27 @@ export class ProductCardComponent {
 	
 	@Input() price?:		number;
 
-	@Input() quantity?:		number;
+	public _quantity?: 		number;
 
-	@Output() addItemToCart: EventEmitter<void> = new EventEmitter<void>();
+	get quantity(): number {
+
+		return (this.addToCartComp!) ? this.addToCartComp?.quantity : this._quantity!;
+
+	}
+
+	@Input() set quantity(quantity: number) {
+
+		this._quantity	= quantity;
+
+		this.inCart	= (!!quantity);
+
+	}
+
+	@Output() addItemToCart:	EventEmitter<void> = new EventEmitter<void>();
+
+	@Output() quantityUpdated: 	EventEmitter<number> = new EventEmitter<number>();
+
+	@ViewChild('addToCartComp') addToCartComp?: AddeToCartComponent;
 
 	get product(): IProduct {
 
@@ -56,11 +76,13 @@ export class ProductCardComponent {
 
 	}
 
+	public inCart	= false;
+
 	constructor() {}
 
-	public onAddToCart(): void {
+	public onQuantityUpdated(): void {
 
-		this.addItemToCart.emit();
+		this.quantityUpdated.emit(this.quantity);
 
 	}
 

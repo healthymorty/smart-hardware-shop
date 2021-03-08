@@ -1,7 +1,11 @@
 @import '../../../styling/mixins.scss';
 
 :host(product-list-item) {
-	padding: 8px;
+	padding: 8px 0px;
+	.quantity {
+		height: 40px;
+		width: 40px;
+	}
 	.product-image {
 		background-size: cover;
 		background-repeat: no-repeat;

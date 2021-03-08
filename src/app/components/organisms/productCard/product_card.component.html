@@ -36,7 +36,7 @@
 
 			<i class="fa fa-tag"></i>
 
-			<span>{{discount}} %</span>
+			<span>{{discount}}%</span>
 
 		</div>
 
@@ -48,16 +48,16 @@
 			
 			 fxLayoutAlign="end center">
 
-			<div class="fa fa-cart-arrow-down" 
-			
-				 fxFlex="none" 
-				 
-				 fxLayout="column" 
-				 
-				 fxLayoutAlign="center center"
-				 
-				 (click)="onAddToCart()"></div>
+			<add-to-cart #addToCartComp
 
+						 fxFlex="none"
+
+						 fxLayout="row"
+			
+						 [quantity]="_quantity"
+						 
+						 (quantityUpdated)="onQuantityUpdated($event)"></add-to-cart>
+			
 		</div>
 
 	</div>

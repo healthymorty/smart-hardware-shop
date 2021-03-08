@@ -1,3 +1,5 @@
+export { AddeToCartComponent }          from '@atoms/addToCart/add_to_cart.component';
+
 export { CheckboxComponent }			from '@atoms/checkbox/checkbox.component';
 
 export { InputComponent }				from '@atoms/inputComp/input.component';
