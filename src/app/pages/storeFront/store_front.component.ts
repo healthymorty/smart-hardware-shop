@@ -32,9 +32,9 @@ export class StoreFrontComponent implements OnInit {
 
 	public cartOrder?:		IOrder;
 
-	public products:		IProduct[]	= [];
+	public products?:		IProduct[];
 
-	public recommendeds:	IProduct[]	= [];
+	public recommendeds?:	IProduct[];
 
 	public user?:			IUser;
 
@@ -139,6 +139,7 @@ export class StoreFrontComponent implements OnInit {
 		const dataRecommendeds	= await this._queryService.callRest('GET', 'http://localhost:8080/recommendeds');
 
 		this.recommendeds		= [...dataRecommendeds.response.body];
+		console.log(this.recommendeds);
 	}
 
 	public async setUser(): Promise<void> {

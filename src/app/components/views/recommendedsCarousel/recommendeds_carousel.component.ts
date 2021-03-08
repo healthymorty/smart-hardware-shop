@@ -12,10 +12,16 @@ import { IProduct } from '@interfaces/Product.interface';
 
 })
 
-export class RecommendedsCarouselComponent {
+export class RecommendedsCarouselComponent implements OnInit {
 
 	@Input() recommendeds: IProduct[] =[];
 
 	constructor() { }
+
+	ngOnInit() {
+
+		console.log(this.recommendeds);
+
+	}
 
 }	

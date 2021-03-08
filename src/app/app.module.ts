@@ -1,21 +1,23 @@
 
-import { APP_BASE_HREF }	from '@angular/common';
+import { APP_BASE_HREF }		from '@angular/common';
 
-import { BrowserModule }	from '@angular/platform-browser';
+import { BrowserModule }		from '@angular/platform-browser';
 
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule }	from '@angular/core';
 
-import { FormsModule } 		from '@angular/forms';
+import { FormsModule } 			from '@angular/forms';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { FlexLayoutModule } 	from '@angular/flex-layout';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } 	from '@angular/common/http';
 
-import { MatDialogModule }	from '@angular/material/dialog';
+import { MatDialogModule }		from '@angular/material/dialog';
 
-import { AppRoutingModule } from './app-routing.module';
+import { MatCarouselModule }	from '@ngbmodule/material-carousel';
 
-import { AppComponent }		from './app.component';
+import { AppRoutingModule } 	from './app-routing.module';
+
+import { AppComponent }			from './app.component';
 
 /* Atoms */
 import { CheckboxComponent }			from '@atoms/checkbox/checkbox.component';
@@ -100,7 +102,9 @@ import { BrowserAnimationsModule }		from '@angular/platform-browser/animations';
 	
 		BrowserAnimationsModule,
 
-		MatDialogModule
+		MatDialogModule,
+
+		MatCarouselModule.forRoot()
 	
 	],
 	
