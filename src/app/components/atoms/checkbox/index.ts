@@ -1,0 +1,1 @@
+export { CheckboxComponent } from '@atoms/checkbox/checkbox.component';

@@ -1,0 +1,52 @@
+@import '../../styling/mixins.scss';
+
+:host(store-front) {
+    display: flex;
+	flex: 1 1 auto;
+	flex-direction: column !important;
+	height: 100%;
+	position: relative;
+	width: 100%;
+    .nav-bar {
+        //border: 1px solid red;
+        height: 60px;
+    }
+    .main-content-container {
+        //border: 1px solid red;
+        .left-menu-panel {
+            //border: 1px solid red;
+            
+        }
+        .middle-panel {
+            //border: 1px solid red;
+            .banner {
+                //border: 1px solid red;
+                height: 200px;
+            }
+            .filter-bar {
+                //border: 1px solid red;
+                height: 40px;
+                padding: 0 0 0 16px;
+                position: relative;
+                z-index: 2;
+                input-comp {
+                    max-width: 300px;
+                    padding: 0 0 0 16px;
+                }
+            }
+            .product-list-view{
+                //border: 1px solid red;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                padding: 16px 0 16px 16px;
+                product-card {
+                    margin: 0 16px 16px 0;
+                    width: 244px;
+                }
+            }
+        }
+    }
+    .right-menu-panel {
+        //border: 1px solid red;
+    }
+}

@@ -1,0 +1,1 @@
+export { SettingsDialogComponent } from '@molecules/settingsDialog/settings_dialog.component';

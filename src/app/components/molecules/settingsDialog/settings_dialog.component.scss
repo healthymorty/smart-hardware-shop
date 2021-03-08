@@ -1,0 +1,26 @@
+@import '../../../styling/mixins.scss';
+
+:host(settings-dialog) {
+	display: block;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	.settings-dialog {
+		max-height: 100% !important;
+		.menu {
+			padding: 16px;
+			width: 250px;
+			@include border-line-right;
+			.item {
+				@include list-item;
+			}
+		}
+		.view {
+			padding: 16px;
+			.section {
+				height: 40px;
+			}
+		}
+	}
+}

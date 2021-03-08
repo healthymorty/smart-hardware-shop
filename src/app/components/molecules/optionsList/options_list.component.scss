@@ -1,0 +1,35 @@
+@import '../../../styling/mixins.scss';
+
+:host(cc-options-list) {
+	background: linear-gradient(145deg, $primary 28%, #7209b7 100%);
+	border-radius: 0 0 8px 8px;
+	height: auto;
+	left: 0;
+	max-height: 0;
+	overflow: hidden;
+	right: 0;
+	position: absolute;
+	top: calc(100% + 2px);
+	@include transitions(0, 250ms, max-height, ease);
+	&.cc-show {
+		max-height: 280px;
+	}
+	.cc-options-list-inner {
+		background-color: rgba(255, 255, 255, 0.1);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+		overflow: auto;
+		padding: 8px;
+		.cc-search-container {
+			padding: 0 0 8px 0;
+			//@include divider-line;
+			cc-input {
+
+			}
+		}
+		cc-tags-list {
+			overflow: scroll;
+			padding: 8px 0;
+			@include divider-line;
+		}
+	}
+}

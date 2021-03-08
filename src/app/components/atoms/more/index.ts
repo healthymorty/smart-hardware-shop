@@ -1,0 +1,1 @@
+export { MoreComponent } from '@atoms/more/more.component';

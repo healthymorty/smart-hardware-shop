@@ -1,0 +1,19 @@
+<div class="more-inner" 
+               
+     fxLayout="{{(vertical) ? 'column' : 'row'}}"
+
+     fxLayoutAlign="center center">
+
+    <div class="dot" fxLayout="{{(vertical) ? 'row' : 'column'}}"></div>
+
+    <div class="dot" fxLayout="{{(vertical) ? 'row' : 'column'}}"></div>
+
+    <div class="dot" fxLayout="{{(vertical) ? 'row' : 'column'}}"></div>
+
+</div>
+
+<div class="more-click-area"
+
+     [ngClass]="{'vertical': vertical}"
+	
+	 (click)="onMoreClick()"></div>

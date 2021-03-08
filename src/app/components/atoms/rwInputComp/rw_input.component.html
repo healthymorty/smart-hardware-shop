@@ -1,0 +1,109 @@
+<div class="rw-inner"
+
+	 fxFlex="none"
+
+	 fxLayout="row"
+
+	 fxLayoutAlign="{{alignment}} center"
+
+	 [ngClass]="{'editing': editing}"
+
+	 (click)="onClick()"
+	 
+	 (mouseenter)="mouseoverElem = true"
+	 
+	 (mouseleave)="mouseoverElem = false">
+
+	<div class="read" 
+
+		 fxFlex
+
+		 fxLayout="row" 
+		
+		 fxLayoutAlign="start center"
+
+		 *ngIf="!editing"
+
+		 [ngClass]="{'placeholder': readText === undefined || readText === '' || (readText === placeholder && _text === undefined)}"
+		
+		 [innerHTML]="readText"></div>
+
+	<input-comp #inputComp
+	
+				class="write"
+
+				fxFlex
+
+				fxLayout="row"
+
+				*ngIf="editing"
+
+				[alignment]="alignment"
+
+				[autocomplete]="autocomplete"
+		
+				[autofocus]="'true'"
+				
+				[disabled]="disabled"
+				
+				[hourClock]="hourClock"
+
+				[icon]="icon"
+
+				[label]="label"
+				
+				[placeholder]="placeholder"
+				
+				[text]="_text"
+				
+				[type]="type"
+
+				[textType]="textType"
+
+				[timeType]="timeType"
+
+				(blurred)="onBlur()"
+				
+				(typingHasStopped)="onTypingHasStopped()"></input-comp>
+
+	<div class="selection-arrows" 
+          
+		 fxFlex="none"
+		
+		 fxLayout="column"
+		
+		 *ngIf="showArrows">
+
+		<div class="arrow" 
+		
+			 fxFlex 
+			
+			 fxLayout="row" 
+			
+			 fxLayoutAlign="center end" 
+
+			 [ngClass]="{ 'disabled': upArrowDisabled! }"
+			
+			 (click)="onUpArrowClicked()">
+
+			<i class="fa fa-caret-up" fxLayout="column"></i>
+		
+		</div>
+
+		<div class="arrow" 
+		
+			 fxFlex fxLayout="row" 
+			
+			 fxLayoutAlign="center start"
+			 
+			 [ngClass]="{ 'disabled': downArrowDisabled! }"
+			
+			 (click)="onDownArrowClicked()">
+	
+			<i class="fa fa-caret-down" fxLayout="column"></i>
+	
+		</div>
+
+	</div>
+
+</div>

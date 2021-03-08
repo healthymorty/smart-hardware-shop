@@ -1,0 +1,53 @@
+<label class="input-label"
+
+		fxFlex="none"
+		
+		fxLayout="column"
+		
+		fxLayoutAlign="center start"
+		
+		*ngIf="icon || label">
+
+	<i class="icon {{icon}}" 
+	
+	   *ngIf="icon"
+		  
+	   [ngClass]="{'no-label': !label}"></i>
+
+	<span [innerHTML]="label"></span>
+	
+</label>
+
+<input #inputElem
+		
+		fxFlex
+		
+		fxLayout="column"
+
+		fxLayoutAlign="{{alignment}} center"
+		
+		autocomplete="{{autocomplete}}"
+		
+		autofocus="{{autofocus}}"
+		
+		disabled="{{disabled}}"
+		
+		placeholder="{{placeholder}}"
+		
+		title="{{uiText}}"
+		
+		type="{{type}}"
+		
+		*ngIf="type !== 'readOnly'"
+		
+		[(ngModel)]="uiText"
+		
+		[ngModelOptions]="{standalone: true}"
+		
+		(blur)="onBlur()"
+
+		(focus)="onFocus()"
+
+		(keypress)="keypressHandler($event)"
+		
+		(keyup)="onKeyup()"/>

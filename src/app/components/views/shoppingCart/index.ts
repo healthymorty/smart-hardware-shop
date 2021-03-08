@@ -1,0 +1,1 @@
+export { ShoppingCartComponent } from '@views/shoppingCart/shopping_cart.component';

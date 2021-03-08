@@ -1,0 +1,1 @@
+export { InputComponent } from '@atoms/inputComp/input.component';

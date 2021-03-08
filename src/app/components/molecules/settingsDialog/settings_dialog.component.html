@@ -1,0 +1,61 @@
+<div class="settings-dialog" 
+
+	 fxFlex
+
+	 fxLayout="row" 
+	 
+	 mat-dialog-content
+	 
+	 (mouseenter)="mouseover = true"
+	 
+	 (mouseleave)="mouseover = false">
+	
+	<div class="menu" fxFlex="none" fxLayout="column">
+
+		<div class="item" fxLayout="row" fxLayoutAlign="start center">Clock</div>
+
+	</div>
+
+	<div class="view" fxFlex fxLayout="column">
+
+		<div class="section" fxLayout="row">
+
+			<label fxFlex="none" fxLayout="column" fxLayoutAlign="center end">Hour Clock</label>
+
+			<div fxFlex
+			
+				 fxLayout="row"
+				 
+				 fxLayoutAlign="end center">
+
+				<checkbox #hour12CheckboxComp
+				
+						  class="hour" 
+				
+						  fxLayout="row" 
+						  
+						  [label]="'12'"
+						  
+						  [selected]="hour_12"
+						  
+						  (checkboxClicked)="onCheckboxClicked('12')"></checkbox>
+
+				<checkbox #hour24CheckboxComp
+				
+						  class="hour" 
+				
+						  fxLayout="row" 
+						  
+						  [label]="'24'"
+						  
+						  [selected]="hour_24"
+						  
+						  (checkboxClicked)="onCheckboxClicked('24')"></checkbox>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

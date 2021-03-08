@@ -1,0 +1,49 @@
+@import '../../../styling/mixins.scss';
+
+:host(more) {
+	cursor: pointer;
+	&.horizontal {
+		padding: 8px 0;
+		&:hover {
+			.more-inner {
+				.dot {
+					background-color: $selected; //rgba(255, 255, 255, 0.5);
+				}
+			}
+		}
+		.more-inner {
+			.dot {
+				background-color: rgba(0, 0, 0, 0.2);
+				height: 5px;
+				width: 5px;
+				&:nth-child(1), 
+				&:nth-child(2) {
+					margin: 0 4px 0 0;
+				}
+			}
+		}
+	}
+	.more-inner {
+		padding: 0px 2px 0px 8px;
+		.dot {
+			background-color: $inputBgColor;
+			border-radius: 50%;
+			height: 4px;
+			width: 4px;
+			&:nth-child(1), 
+			&:nth-child(2) {
+				margin: 0 0 2px 0;
+			}
+		}
+	}	
+	.more-click-area {
+		&.vertical {
+			bottom: 0;
+			height: 40px;
+			position: absolute;
+			top: -4px;
+			width: 21px;
+			z-index: 0;
+		}
+	}
+}

@@ -1,0 +1,42 @@
+@import '../../../styling/mixins.scss';
+
+:host(paging) {
+	padding: 0 16px 0 16px;
+	.size-item {
+		&.selected {
+			background-color: $selected;
+		}
+	}
+	.page-size {
+		position: relative;
+		.page-size-text {
+			padding: 0 8px;
+		}
+		.size-list {
+			background-color: #fff;
+			border-radius: 4px;
+			position: absolute;
+			right: -41px;
+    		top: -61px;
+			.size-item {
+				border-radius: 4px;
+				cursor: pointer;
+				height: 40px;
+				padding: 8px;
+				width: 40px;
+			}
+		}
+	}
+	.page-list {
+		.page {
+			border-radius: 4px;
+			cursor: pointer;
+			height: 40px;
+   			width: 40px;
+			   &.selected, &:hover {
+				   background-color: $selected;
+				   color: #fff;
+			   }
+		}
+	}
+}

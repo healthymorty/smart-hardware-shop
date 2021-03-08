@@ -1,0 +1,135 @@
+<div class="nav-bar" fxFlex="none" fxLayout="row"></div>
+
+<div class="main-content-container" 
+
+	 fxFlex 
+	 
+	 fxLayout="row">
+
+	<!--<div class="left-menu-panel" 
+	
+		 fxFlex="20"
+		 
+		 fxLayout="column"></div>-->
+
+	<div class="middle-panel" 
+	
+		 fxFlex
+		 
+		 fxLayout="column">
+
+		<div class="banner" fxFlex="none" fxLayout="row">
+
+			<recommendeds-carousel fxFlex 
+			
+					  			   fxLayout="column"
+
+								   *ngIf="recommendeds"
+
+					  			   [recommendeds]="recommendeds"></recommendeds-carousel>
+
+		</div>
+
+		<div class="filter-bar" fxFlex="none" fxLayout="row">
+
+			<input-comp #searchInputComp
+			
+						fxFlex
+			
+						fxLayout="row"
+					
+						[icon]="'fa fa-search'"
+											
+						[placeholder]="'Search Products'"
+
+						[text]="searchText"
+						
+						(typingHasStopped)="onSearch()"></input-comp>
+
+			<paging #topPagingComp
+			
+					fxFlex
+
+					fxLayout="row"
+
+					fxLayoutAlign="end center"
+			
+					[itemName]="'product'"
+								
+					[pageSize]="pageSize"
+					
+					[totalItems]="querysTotalRowCount"
+					
+					(page)="onPage($event)"></paging>
+
+		</div>
+
+		<div class="product-list-view" fxFlex fxLayout="column">
+
+			<div class="product-container" fxFlex fxLayout="row wrap">
+
+				<product-card #productCardComp
+				
+							  fxFlex="none"
+				
+							  fxLayout="column"
+							  
+							  *ngFor="let product of products"
+							  
+							  [description]="product.description"
+		
+							  [defaultImage]="product.defaultImage"
+
+							  [discount]="product.discount"
+
+							  [id]="product.id"
+
+							  [images]="product.images"
+
+							  [name]="product.name"
+							  
+							  [price]="product.price"
+
+							  [quantity]="(cartOrderProductIDMap && cartOrderProductIDMap![product.id]) ? cartOrderProductIDMap![product.id].quantity : null"
+							  							  
+							  (quantityUpdated)="onQuantityUpdated(productCardComp)"></product-card>
+
+			</div>
+
+			<paging #bottomPagingComp
+			
+					fxFlex="none"
+
+					fxLayout="row"
+
+					fxLayoutAlign="end center"
+			
+					[itemName]="'product'"
+								
+					[pageSize]="pageSize"
+					
+					[totalItems]="querysTotalRowCount"
+					
+					(page)="onPage($event)"></paging>
+
+		</div>
+		
+	</div>
+
+	<div class="right-menu-panel" 
+	
+		 fxFlex="25"
+		 
+		 fxLayout="column">
+		
+		<shopping-cart fxFlex 
+		
+					   fxLayout="column" 
+
+					   *ngIf="cartOrder"
+					   
+					   [order]="cartOrder"></shopping-cart>
+		
+	</div>
+	
+</div>

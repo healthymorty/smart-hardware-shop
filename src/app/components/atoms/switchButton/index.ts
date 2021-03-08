@@ -1,0 +1,1 @@
+export { SwitchButtonComponent } from '@atoms/switchButton/switch_button.component';

@@ -1,0 +1,43 @@
+<div class="title" 
+
+	 fxFlex="none" 
+	  
+	 fxLayout="row"
+	 
+	 fxLayoutAlign="center center">
+
+	<h2>Shopping Cart</h2>
+
+</div>
+
+<div class="products-list"
+
+	 fxFlex
+	 
+	 fxLayout="column"
+	 
+	 *ngIf="order">
+
+	 <product-list-item fxFlex="none" 
+	 
+	 					fxLayour="row"
+
+						*ngFor="let product of order!.products"
+						 
+						[name]="product.name"
+						
+						[image]="product.defaultImage"
+						
+						[price]="product.price"
+						
+						[quantity]="product.quantity"></product-list-item>
+	
+</div>
+
+<product-list-item fxFlex="none" 
+	
+				   fxLayour="row"
+
+				   [name]="'Total'"
+					
+				   [price]="total"></product-list-item>

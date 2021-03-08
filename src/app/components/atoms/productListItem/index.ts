@@ -1,0 +1,1 @@
+export { ProductListItemComponent } from '@atoms/productListItem/product_list_item.component';

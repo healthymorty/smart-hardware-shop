@@ -1,0 +1,1 @@
+export { StoreFrontComponent } from '@pages/storeFront/store_front.component';

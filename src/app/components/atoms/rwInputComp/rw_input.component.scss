@@ -1,0 +1,50 @@
+@import '../../../styling/mixins.scss';
+
+:host(rw-input-comp) {
+	//width: 100%;
+	.rw-inner {
+		border-radius: 4px;
+		height: 32px;
+		padding: 0 8px;
+		&.editing {
+			background-color: $inputBgColor;
+			padding: 0;
+			.write {
+				//padding: 4px; //bt
+				padding: 0 4px;
+			}
+		}
+		&:hover {
+			background-color: $inputBgColor;
+			cursor: text;
+		}
+		.placeholder {
+			color: $readPlaceholderColor;
+		}
+		.selection-arrows {
+			cursor: pointer;
+			.arrow {
+				padding: 0 4px 0 0;
+				&.disabled {
+					opacity: 0.4;
+					i:hover {
+						color: $readPlaceholderColor;
+					}
+				}
+				i {
+					color: $readPlaceholderColor;
+					font-size: 20px;
+					&:hover {
+						color: $textColor;
+					}
+				}
+				i.fa.fa-caret-up {
+					margin: 0 0 -4px 0;
+				}
+				i.fa.fa-caret-down {
+					margin: -4px 0 0 0;
+				}
+			}
+		}
+	}
+}

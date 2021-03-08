@@ -1,0 +1,60 @@
+@import './app/styling/mixins.scss';
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, abbr, address, cite, code, del,
+dfn, em, img, ins, kbd, q, samp, small,
+strong, sub, sub, var, b, i, dl, dt, dd, 
+ol, ul, li, a, fieldset, form, label,
+legend, table, caption, tbody, tfoot,
+thead, tr, th, td, article, aside, canvas,
+details, figcaption, figure, footer, header,
+hgroup, menu, nav, section, summary, time,
+mark, audio, video, input {
+    background: none repeat scroll 0 0  transparent;
+    border: 0 none;
+    font-size: $font-size;
+    font-weight: $font-weight-normal;
+    list-style: none outside none;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    text-decoration: none;
+    vertical-align: baseline;
+}
+*:focus { outline: none; }
+*::-moz-focus-inner { border: 0; }
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+	background-color: rgba(216, 224, 230, 0.8);
+}
+.clearfix:after {
+    clear: both;
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+a.hover, a.focus, a:visited {
+    cursor: pointer;
+    outline: 0 none !important;
+    text-decoration: none !important;
+}
+.none {
+    display: none;
+}
+html, body {
+    background-color: $inputBgColor;
+    color: $textColor;
+    font-family: Helvetica, Arial, sans-serif;
+    height: 100%;
+    width: 100%;
+    .mat-dialog-container {
+        padding: 0;
+    }
+}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

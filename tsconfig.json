@@ -1,0 +1,55 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"sourceMap": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": false,
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "es2020",
+		"lib": [
+			"es2018",
+			"dom"
+		],
+		"types": ["chrome", "node", "jest"],
+		"typeRoots": [ "node_modules/@types" ],
+		"paths": {
+			"@app/*":					["src/app/*"],
+			"@assets/*":				["src/assets/*"],
+			"@classes/*":				["src/app/classes/*"],
+			"@components/*":			["src/app/components/*"],
+			"@const/*":					["src/app/const/*"],
+			"@atoms/*":					["src/app/components/atoms/*"],
+			"@molecules/*":				["src/app/components/molecules/*"],
+			"@organisms/*":				["src/app/components/organisms/*"],
+			"@componentPipes/*":		["src/app/components/pipes/*"],
+			"@views/*":					["src/app/components/views/*"],
+			"@componentServices/*":		["src/app/components/services/*"],
+			"@directives/*":    		["src/app/directives/*"],
+			"@interfaces/*":    		["src/app/interfaces/*"],
+			"@mocks/*":        			["src/app/mocks/*"],
+			"@models/*":        		["src/app/models/*"],
+			"@overrideComponents/*":	["src/app/overrideComponents/*"],
+			"@pages/*":         		["src/app/pages/*"],
+			"@dashboard/*":				["src/app/pages/dashboard/*"],
+			"@services/*":      		["src/app/services/*"],
+			"@stubs/*":       			["src/app/stubs/*"],
+			"@styling/*":       		["src/app/styling/*"]
+		}
+	},
+	"angularCompilerOptions": {
+		"enableIvy": false,
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true
+	}
+}

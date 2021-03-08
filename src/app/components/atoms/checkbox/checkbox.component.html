@@ -1,0 +1,9 @@
+<div class="checkbox" 
+
+     fxLayout="column"
+     
+     [ngClass]="{'selected' : selected}"
+     
+     (click)="onClick()"></div>
+
+<label fxLayout="column" *ngIf="label" [innerHTML]="label"></label>
