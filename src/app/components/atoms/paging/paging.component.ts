@@ -36,15 +36,31 @@ export class PagingComponent {
 
 	}
 
-	@Input() pageSize		= 24;
+	@Input() pageSize	= 24;
 
-	@Input() totalItems?: 	number;
+	public _totalItems?:	number; 
+
+	get totalItems(): number {
+
+		return this._totalItems!;
+
+	}
+	
+	@Input() set totalItems(totalItems: number) {
+
+		this._totalItems	= totalItems;
+
+		if (totalItems != null && this.initiated)	this.setPageSetMap();
+
+	};
 
 	@Output() page:	EventEmitter<number> = new EventEmitter<number>();
 
+	public initiated		= false;
+
 	public lastPageSetNum?:	number;	
 
-	public numberOfPages	= 0;
+	public numberOfPageSets	= 0;
 
 	public pageSetMap?:		{ [key: number]: any[] };
 
@@ -53,6 +69,8 @@ export class PagingComponent {
 	public pageSetSize		= 5;
 
 	public range?:			string;
+
+	
 
 	constructor(
 
@@ -70,6 +88,8 @@ export class PagingComponent {
 
 		this.setPageSetMap();
 
+		this.initiated	= true;
+
 	}
 
 	public onJumpToBeginning(): void {
@@ -86,9 +106,7 @@ export class PagingComponent {
 
 		this.setPageSetNum();
 
-		const pageSetLength	= Object.keys(this.pageSetMap!).length;
-
-		this.pageNum		= this.pageSetMap![pageSetLength][4];
+		this.pageNum		= this.pageSetMap![this.numberOfPageSets][this.pageSetMap![this.numberOfPageSets].length - 1];
 
 		this.page.emit(this.pageNum);
 
@@ -132,11 +150,13 @@ export class PagingComponent {
 
 	public setPageSetMap(): void {
 		
-		this.numberOfPages	= Math.ceil(Math.ceil(this.totalItems! / this.pageSize) / this.pageSetSize);
+		const numberOfPages		= Math.ceil(this.totalItems! / this.pageSize);
+
+		this.numberOfPageSets	= Math.ceil(numberOfPages / this.pageSetSize);
 
 		const pageMap:	{ [key: number]: any[] } = {};
 
-		for (let i = 1; i <= this.numberOfPages; i++) {
+		for (let i = 1; i <= this.numberOfPageSets; i++) {
 
 			if (!pageMap[i]) pageMap[i]	= [];
 			
@@ -144,7 +164,7 @@ export class PagingComponent {
 
 			for (let j = (setLength + 1) - this.pageSetSize; j <= setLength; j++)
 
-				if (j <= this.totalItems!) pageMap[i].push(j);
+				if (j <= numberOfPages) pageMap[i].push(j);
 
 		}
 

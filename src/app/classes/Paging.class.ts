@@ -8,6 +8,12 @@ export class Paging {
 
 	) {}
 
+	public clear(): void {
+
+		this.pageMap	= {};
+
+	}
+
 	public async getPage(pageNum: number): Promise<any> {
 
 		if (!this.pageMap[pageNum]) 

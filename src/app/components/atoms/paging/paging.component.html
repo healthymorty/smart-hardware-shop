@@ -6,7 +6,7 @@
 		  
 		  fxLayout="column"
 		  
-		  fxLayoutAlign="center start">Showing {{range}} of {{totalItems}} {{itemName}}s</span>
+		  fxLayoutAlign="center start">Showing {{range}} of {{_totalItems}} {{itemName}}s</span>
 
 	<!--<div class="page-size" fxFlex="none" fxLayout="row">
 
@@ -200,7 +200,7 @@
 
 		 fxLayoutAlign="center center"
 
-		 *ngIf="numberOfPages >= 5 && pageNum < pageSetMap[lastPageSetNum][pageSetMap[lastPageSetNum].length - 1]"
+		 *ngIf="pageNum < pageSetMap[lastPageSetNum][pageSetMap[lastPageSetNum].length - 1]"
 		 
 		 (click)="onPageForward()"></div>
 

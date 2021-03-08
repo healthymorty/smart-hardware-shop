@@ -2,7 +2,13 @@ import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output, V
 
 import { MatDialogRef, MAT_DIALOG_DATA }	from '@angular/material/dialog';
 
-import { CheckboxComponent }	from '@atoms/checkbox';
+import { 
+
+	InputComponent,
+	
+	PagingComponent 
+
+}	from '@atoms/index';
 
 import { 
 
@@ -24,8 +30,6 @@ import {
 
 import { Paging }	from '@classes/Paging.class';
 
-import { PagingComponent } from '@atoms/paging';
-
 @Component({
 
 	selector: 'store-front',
@@ -39,6 +43,8 @@ import { PagingComponent } from '@atoms/paging';
 export class StoreFrontComponent implements OnInit {
 
 	@ViewChild('bottomPagingComp') bottomPagingComp?: PagingComponent;
+
+	@ViewChild('searchInputComp') searchInputComp?:	InputComponent;
 
 	@ViewChild('topPagingComp') topPagingComp?: PagingComponent;
 
@@ -60,7 +66,21 @@ export class StoreFrontComponent implements OnInit {
 
 	public recommendeds?:	IProduct[];
 
-	public totalProducts	= 1015;
+	public searchTimer?:	any;
+
+	public searchText		= this.searchValue;
+
+	get searchValue(): string | undefined {
+
+		const searchValue	= (this._URLManagerService.hasQueryParam('search')) ?
+		
+			this._URLManagerService.getQueryParam('search') : undefined;
+
+		return searchValue;
+
+	}
+
+	public querysTotalRowCount?:	number;
 
 	public user?:			IUser;
 
@@ -108,9 +128,19 @@ export class StoreFrontComponent implements OnInit {
 
 	public async getNewPage(pageNum: number): Promise<IProduct[]> {
 
-		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products?_page='+ pageNum +'&_limit=' + this.pageSize);
+		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products?' + this.getPageQueryString(pageNum));
+
+		this.setQuerysTotalRowCount(pageNum, dataProducts.response.headers.get('X-Total-Count'));
 
 		return [...dataProducts.response.body];
+
+	}
+
+	public getPageQueryString(pageNum: number): string {
+
+		const searchParam	= (this.searchValue) ? 'q=' + this.searchValue + '&' : '';
+
+		return searchParam + '_page='+ pageNum +'&_limit=' + this.pageSize;
 
 	}
 
@@ -122,6 +152,13 @@ export class StoreFrontComponent implements OnInit {
 
 		return productIdMap;
 
+	}
+
+	public async getSpecificProducts(queryString: string): Promise<IProduct[]> {
+
+		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products/?' + queryString);
+
+		return dataProducts.response.body;
 	}
 
 	public mergeOrderProductsWithProducts(order: IOrder, products: IProduct[]): IOrder {
@@ -144,9 +181,7 @@ export class StoreFrontComponent implements OnInit {
 
 	public async onPage(pageNum = this.pageNum): Promise<void> {
 
-		if (this.topPagingComp!.pageNum !== pageNum) this.topPagingComp!.pageNum = pageNum;
-
-		if (this.bottomPagingComp!.pageNum !== pageNum) this.bottomPagingComp!.pageNum = pageNum;
+		this.updatePagingComp(pageNum);
 
 		const dataProducts	= await this.page.getPage(pageNum);
 
@@ -160,11 +195,24 @@ export class StoreFrontComponent implements OnInit {
 
 	}
 
-	public async searchProducts(queryString: string): Promise<IProduct[]> {
+	public async onSearch(): Promise<void> {
 
-		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products/?' + queryString);
+		(this._URLManagerService.hasQueryParam('search') && !this.searchInputComp!.isValid) ?
 
-		return dataProducts.response.body;
+				this._URLManagerService.clearQueryParam('search') :
+				
+				this._URLManagerService.updateURLFromParams({search: this.searchInputComp!.text});
+
+		clearTimeout(this.searchTimer);
+
+		this.searchTimer	= setTimeout(async () => {
+			
+			this.page.clear();
+
+			this.onPage(1);
+
+		}, 2000);
+
 	}
 
 	public async setCartOrder(): Promise<void> {
@@ -173,7 +221,7 @@ export class StoreFrontComponent implements OnInit {
 
 		const multiProductIdQueryString	= this.getMultiProductIdQueryString(order);
 
-		const dataProducts	= await this.searchProducts(multiProductIdQueryString);
+		const dataProducts	= await this.getSpecificProducts(multiProductIdQueryString);
 
 		this.cartOrder		= this.mergeOrderProductsWithProducts(order, dataProducts);
 
@@ -187,11 +235,25 @@ export class StoreFrontComponent implements OnInit {
 
 	}
 
+	public setQuerysTotalRowCount(pageNum: number, HeadersXTotalCount: number): void {
+
+		if (pageNum === 1) this.querysTotalRowCount	= HeadersXTotalCount;
+
+	}
+
 	public async setUser(): Promise<void> {
 
 		const dataUser	= await this._queryService.callRest('GET', 'http://localhost:8080/users/1');
 
 		this.user		= dataUser.response.body;
+
+	}
+
+	public updatePagingComp(pageNum: number): void {
+
+		if (this.topPagingComp!.pageNum !== pageNum) this.topPagingComp!.pageNum = pageNum;
+
+		if (this.bottomPagingComp!.pageNum !== pageNum) this.bottomPagingComp!.pageNum = pageNum;
 
 	}
 
