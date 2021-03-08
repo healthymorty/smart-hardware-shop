@@ -22,7 +22,9 @@ import {
 
 }	from '@services/index';
 
-import { Paging }	from '@classes/paging.class';
+import { Paging }	from '@classes/Paging.class';
+
+import { PagingComponent } from '@atoms/paging';
 
 @Component({
 
@@ -36,6 +38,10 @@ import { Paging }	from '@classes/paging.class';
 
 export class StoreFrontComponent implements OnInit {
 
+	@ViewChild('bottomPagingComp') bottomPagingComp?: PagingComponent;
+
+	@ViewChild('topPagingComp') topPagingComp?: PagingComponent;
+
 	public cartOrder?:		IOrder;
 
 	public page				= new Paging(this.getNewPage.bind(this));
@@ -46,7 +52,7 @@ export class StoreFrontComponent implements OnInit {
 
 		return (this._URLManagerService.hasQueryParam('page')) ?
 
-			this._URLManagerService.getQueryParam('page') : 1;
+			+this._URLManagerService.getQueryParam('page') : 1;
 
 	}
 
@@ -79,7 +85,7 @@ export class StoreFrontComponent implements OnInit {
 	}
 
 	public async getCartOrder(): Promise<IOrder> {
-		console.log(this.user);
+
 		const dataOrder	= await this._queryService.callRest('GET', 'http://localhost:8080/carts/' + this.user!.id);
 
 		return dataOrder.response.body;
@@ -100,7 +106,7 @@ export class StoreFrontComponent implements OnInit {
 
 	}
 
-	public async getNewPage(pageNum: number): Promise<IProduct> {
+	public async getNewPage(pageNum: number): Promise<IProduct[]> {
 
 		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products?_page='+ pageNum +'&_limit=' + this.pageSize);
 
@@ -138,8 +144,12 @@ export class StoreFrontComponent implements OnInit {
 
 	public async onPage(pageNum = this.pageNum): Promise<void> {
 
+		if (this.topPagingComp!.pageNum !== pageNum) this.topPagingComp!.pageNum = pageNum;
+
+		if (this.bottomPagingComp!.pageNum !== pageNum) this.bottomPagingComp!.pageNum = pageNum;
+
 		const dataProducts	= await this.page.getPage(pageNum);
-		console.log(dataProducts);
+
 		this.products		= [];
 
 		setTimeout(() => {
@@ -151,7 +161,7 @@ export class StoreFrontComponent implements OnInit {
 	}
 
 	public async searchProducts(queryString: string): Promise<IProduct[]> {
-		console.log(queryString);
+
 		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products/?' + queryString);
 
 		return dataProducts.response.body;

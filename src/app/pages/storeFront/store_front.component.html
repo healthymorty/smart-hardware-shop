@@ -32,11 +32,29 @@
 
 		<div class="filter-bar" fxFlex="none" fxLayout="row">
 
-			<input-comp fxLayout="row"
+			<input-comp fxFlex
+			
+						fxLayout="row"
 					
 						[icon]="'fa fa-search'"
 											
-						[placeholder]="'search'"></input-comp>
+						[placeholder]="'Search'"></input-comp>
+
+			<paging #topPagingComp
+			
+					fxFlex
+
+					fxLayout="row"
+
+					fxLayoutAlign="end center"
+			
+					[itemName]="'product'"
+								
+					[pageSize]="pageSize"
+					
+					[totalItems]="totalProducts"
+					
+					(page)="onPage($event)"></paging>
 
 		</div>
 
@@ -64,7 +82,15 @@
 
 			</div>
 
-			<paging [itemName]="'Product'"
+			<paging #bottomPagingComp
+			
+					fxFlex="none"
+
+					fxLayout="row"
+
+					fxLayoutAlign="end center"
+			
+					[itemName]="'product'"
 								
 					[pageSize]="pageSize"
 					

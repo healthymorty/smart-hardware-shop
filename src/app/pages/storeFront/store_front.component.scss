@@ -26,7 +26,11 @@
             .filter-bar {
                 border: 1px solid red;
                 height: 40px;
+                padding: 0 0 0 16px;
+                position: relative;
+                z-index: 2;
                 input-comp {
+                    max-width: 300px;
                     padding: 0 0 0 16px;
                 }
             }

@@ -20,7 +20,7 @@ import { CustomUrlSerializerService }	from './CustomUrlSerializer.service';
 
 export class URLManagerService {
 
-	static GLOBAL_CONTEXT		= 'store-front/';
+	static GLOBAL_CONTEXT		= '/';
 
 	static EXTERNAL_APP_ID:		string;
 

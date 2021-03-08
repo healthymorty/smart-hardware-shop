@@ -42,9 +42,11 @@ export class PagingComponent {
 
 	@Output() page:	EventEmitter<number> = new EventEmitter<number>();
 
+	public lastPageSetNum?:	number;	
+
 	public numberOfPages	= 0;
 
-	public pageSetMap?:		{ [key: number]: any[] } = {};
+	public pageSetMap?:		{ [key: number]: any[] };
 
 	public pageSetNum?:		number;
 
@@ -59,12 +61,12 @@ export class PagingComponent {
 	) { }
 
 	ngOnInit() {
-
-		if (this.pageNum === undefined)
+		
+		if (this._pageNum === undefined)
 
 			this.pageNum	= (this._URLManagerService.hasQueryParam('page')) ?
 
-				this._URLManagerService.getQueryParam('page') : 1;
+				+this._URLManagerService.getQueryParam('page') : 1;
 
 		this.setPageSetMap();
 
@@ -72,15 +74,23 @@ export class PagingComponent {
 
 	public onJumpToBeginning(): void {
 
-		this.page.emit(this.pageSetMap[1][0]);
+		this.setPageSetNum();
+
+		this.pageNum	= this.pageSetMap![1][0];
+
+		this.page.emit(this.pageNum);
 
 	}
 
 	public onJumpToEnd(): void {
 
-		const pageSetLength	= Object.keys(this.pageSetMap).length;
+		this.setPageSetNum();
 
-		this.page.emit(this.pageSetMap[pageSetLength][4]);
+		const pageSetLength	= Object.keys(this.pageSetMap!).length;
+
+		this.pageNum		= this.pageSetMap![pageSetLength][4];
+
+		this.page.emit(this.pageNum);
 
 	}
 
@@ -88,23 +98,35 @@ export class PagingComponent {
 
 		this.pageNum	= pageNum;
 
+		this.page.emit(this.pageNum);
+
 	}
 
 	public onPageBackward(): void {
 
-		this.page.emit(this.pageNum - 1);
+		this.setPageSetNum();
+
+		this.pageNum	= this.pageNum! - 1;
+
+		this.page.emit(this.pageNum);
 
 	}
 
 	public onPageForward(): void {
 
-		this.page.emit(this.pageNum + 1);
+		this.setPageSetNum();
+
+		this.pageNum	= this.pageNum! + 1;
+
+		this.page.emit(this.pageNum);
 
 	}
 
 	public onPageSizeSelected(size: number): void {
 
 		this.pageSize	= size;
+
+		this.setPageSetNum();
 
 	}
 
@@ -122,15 +144,15 @@ export class PagingComponent {
 
 			for (let j = (setLength + 1) - this.pageSetSize; j <= setLength; j++)
 
-				if (this.totalItems! <= j)
-
-					pageMap[i].push(j);
+				if (j <= this.totalItems!) pageMap[i].push(j);
 
 		}
 
-		this.pageSetMap	= pageMap;
+		this.pageSetMap		= pageMap;
 
-	}
+		this.lastPageSetNum	= Object.keys(pageMap).length;
+
+	}	
 
 	public setPageSetNum(): void {
 
@@ -151,12 +173,10 @@ export class PagingComponent {
 	}
 
 	public setURLPageNumber(): void {
+		
+		if (!this._URLManagerService.hasQueryParam('page') || +this._URLManagerService.getQueryParam('page') !== this.pageNum)
 
-		const hasURLPageNumber	= this._URLManagerService.hasQueryParam('page');
-
-		if (!hasURLPageNumber || hasURLPageNumber && this._URLManagerService.getQueryParam('page') !== this.pageNum) 
-
-			this._URLManagerService.updateURLFromParams({page: this.pageNum.toString()});
+			this._URLManagerService.updateURLFromParams({page: this.pageNum!.toString()});
 
 	}
 
