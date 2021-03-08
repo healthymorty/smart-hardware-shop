@@ -1,12 +1,8 @@
-export { AddeToCartComponent }          from '@atoms/addToCart/add_to_cart.component';
-
 export { CheckboxComponent }			from '@atoms/checkbox/checkbox.component';
 
 export { InputComponent }				from '@atoms/inputComp/input.component';
 
 export { MoreComponent }				from '@atoms/more/more.component';
-
-export { PagingComponent }              from '@atoms/paging/paging.component';
 
 export { ProductListItemComponent }     from '@atoms/productListItem/product_list_item.component';
 

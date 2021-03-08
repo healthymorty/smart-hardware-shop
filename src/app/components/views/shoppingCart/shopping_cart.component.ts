@@ -16,7 +16,7 @@ export class ShoppingCartComponent implements OnInit {
 
 	@Input() order?:	IOrder;
 
-	public total?:		number;
+	public total?:		string;
 
 	constructor() {}
 
@@ -34,7 +34,7 @@ export class ShoppingCartComponent implements OnInit {
 
 			total += product.price;
 
-		this.total	= total;
+		this.total	= '$' + total;
 
 	}
 

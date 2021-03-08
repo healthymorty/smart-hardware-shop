@@ -1,30 +1,26 @@
 
-import { APP_BASE_HREF }		from '@angular/common';
+import { APP_BASE_HREF }	from '@angular/common';
 
-import { BrowserModule }		from '@angular/platform-browser';
+import { BrowserModule }	from '@angular/platform-browser';
 
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule }	from '@angular/core';
 
-import { FormsModule } 			from '@angular/forms';
+import { FormsModule } 		from '@angular/forms';
 
-import { FlexLayoutModule } 	from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { HttpClientModule } 	from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
-import { MatDialogModule }		from '@angular/material/dialog';
+import { MatDialogModule }	from '@angular/material/dialog';
 
-import { MatCarouselModule }	from '@ngbmodule/material-carousel';
+import { AppRoutingModule } from './app-routing.module';
 
-import { AppRoutingModule } 	from './app-routing.module';
-
-import { AppComponent }			from './app.component';
+import { AppComponent }		from './app.component';
 
 /* Atoms */
-import { AddeToCartComponent }			from '@atoms/addToCart/add_to_cart.component';
 import { CheckboxComponent }			from '@atoms/checkbox/checkbox.component';
 import { InputComponent }				from '@atoms/inputComp/input.component';
 import { MoreComponent }				from '@atoms/more/more.component';
-import { PagingComponent }				from '@atoms/paging/paging.component';
 import { ProductListItemComponent }		from '@atoms/productListItem/product_list_item.component';
 import { ProgressBarComponent }			from '@atoms/progressBar/progress_bar.component';
 import { RWInputComponent }				from '@atoms/rwInputComp/rw_input.component';
@@ -50,7 +46,6 @@ import { GlobalService }				from '@services/Global.service';
 import { LocalStorageService }			from '@services/LocalStorage.service';
 import { MaskService }					from '@services/Mask.service';
 import { QueryService }					from '@services/Query.service';
-import { URLManagerService }			from '@services/URLManager.service';
 
 /*Animations*/
 import { BrowserAnimationsModule }		from '@angular/platform-browser/animations';
@@ -64,11 +59,9 @@ import { BrowserAnimationsModule }		from '@angular/platform-browser/animations';
 		/* Pipes */
 
 		/* Atoms */
-		AddeToCartComponent,
 		CheckboxComponent,
 		InputComponent,
 		MoreComponent,
-		PagingComponent,
 		ProductListItemComponent,
 		ProgressBarComponent,
 		RWInputComponent,
@@ -107,9 +100,7 @@ import { BrowserAnimationsModule }		from '@angular/platform-browser/animations';
 	
 		BrowserAnimationsModule,
 
-		MatDialogModule,
-
-		MatCarouselModule.forRoot()
+		MatDialogModule
 	
 	],
 	
@@ -125,9 +116,7 @@ import { BrowserAnimationsModule }		from '@angular/platform-browser/animations';
 
 		MaskService,
 
-		QueryService,
-
-		URLManagerService
+		QueryService
 
 	],
 

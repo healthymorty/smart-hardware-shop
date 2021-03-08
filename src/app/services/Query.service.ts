@@ -180,7 +180,7 @@ export class QueryService {
 		statusCode:	number
 		
 	): IQueryResponse {
-		
+
 		return { 
 			
 			response:	data.event, 

@@ -17,10 +17,12 @@ export class ProductListItemComponent implements OnInit {
 	@Input() name?:		string;
 
 	@Input() price?:	string;
-
-	@Input() quantity?:	number;
 	
 	constructor() { }
 
-	ngOnInit() {}
+	ngOnInit() {
+
+		console.log(this.image);
+
+	}
 }	

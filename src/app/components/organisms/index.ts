@@ -2,15 +2,11 @@ export {
 
 	/* Atoms */
 
-	AddeToCartComponent,
-
 	CheckboxComponent,
 
 	InputComponent,
 
 	MoreComponent,
-
-	PagingComponent,
 
 	ProductListItemComponent,
 

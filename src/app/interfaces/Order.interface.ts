@@ -1,4 +1,4 @@
-import { IProduct }		from './Product.interface';
+import { IProduct }	from './Product.interface';
 
 export interface IOrder {
 	

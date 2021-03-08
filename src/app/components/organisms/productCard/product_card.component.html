@@ -6,11 +6,11 @@
 
 <div class="product-image"
 	 
-	 fxFlex="none"
+	 fxFlex
 	 
-	 fxLayout="column"
-	 
-	 [ngStyle]="{'background-image': 'url(' + defaultImage + ')'}">
+	 fxLayout="row">
+	
+	 <img *ngIf="defaultImage" [src]="defaultImage" [alt]="name">
 
 	 <i class="fa fa-store" *ngIf="!defaultImage"></i>
 	
@@ -18,53 +18,33 @@
 
 <div class="product-context-content"
 
-	 fxFlex="none"
+	 fxFlex
 	 
 	 fxLayout="column">
 	
-	<div class="stats" fxFlex="none" fxLayout="row">
+	<div class="stats" fxFlex fxLayout="row">
 
 		<div class="price" fxFlex fxLayout="row">
 
 			<i class="fa fa-tags"></i>
 
-			<span>{{price | currency:'USD':'symbol':'4.2-2'}}</span>
+			<span>{{price}}</span>
 
 		</div>
 
-		<div class="discount" fxFlex="none" fxLayout="row">
+		<div class="discount" fxFlex fxLayout="row">
 
 			<i class="fa fa-tag"></i>
 
-			<span>{{discount}}%</span>
+			<span>{{discount}}</span>
 
-		</div>
-
-		<div class="actions" 
-		
-			 fxFlex 
-			 
-			 fxLayout="row" 
-			
-			 fxLayoutAlign="end center">
-
-			<add-to-cart #addToCartComp
-
-						 fxFlex="none"
-
-						 fxLayout="row"
-			
-						 [quantity]="_quantity"
-						 
-						 (quantityUpdated)="onQuantityUpdated()"></add-to-cart>
-			
 		</div>
 
 	</div>
 
 	<div class="description" 
 		
-		 fxFlex="none" 
+		 fxFlex 
 		 
 		 fxLayout="row"
 		 

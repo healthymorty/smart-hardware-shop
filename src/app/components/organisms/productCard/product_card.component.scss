@@ -1,34 +1,5 @@
 @import '../../../styling/mixins.scss';
 
 :host(product-card) {
-	//border: 1px solid red;
-    border-radius: 8px;
-	height: 400px;
-	width: 250px;
-	.title {
-		h3 {
-			font-weight: 900;
-    		padding: 8px;
-		}
-	}
-	.product-image {
-		background-size: cover;
-		background-repeat: no-repeat;
-		height: 200px !important;
-		overflow: hidden;
-	}
-	.product-context-content {
-		.stats {
-			padding: 8px;
-			.discount {
-				margin: 0 0 0 8px;
-			}
-			.fa {
-				margin: 0 4px 0 0px;
-			}
-		}
-		.description {
-			padding: 0 8px 8px 8px;
-		}
-	}
+	
 }

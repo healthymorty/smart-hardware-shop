@@ -1,24 +1,10 @@
-<div class="quantity" 
-
-     fxFlex="none"
-     
-     fxLayout="column" 
-     
-     fxLayoutAlign="center center">
-
-     <span [innerHTML]="quantity"></span>
-
-</div>
-
 <div class="product-image" 
 
      fxFlex="none"
      
-     fxLayout="column"
+     fxLayout="column">
 
-     fxLayoutAlign="center center"
-     
-     [ngStyle]="{'background-image': 'url(' + image + ')'}">
+     <img *ngIf="image" [src]="image" [alt]="name">
 
      <i class="fa fa-store" *ngIf="!image"></i>
 
@@ -28,9 +14,7 @@
 
      fxFlex 
      
-     fxLayout="column" 
-     
-     fxLayoutAlign="center start">
+     fxLayout="column">
 
      <span [innerHTML]="name"></span>
 
@@ -38,12 +22,12 @@
 
 <div class="price" 
 
-     fxFlex="none"
+     fxFlex 
      
      fxLayout="column"
      
      fxLayoutAlign="center start">
 
-     <span [innerHTML]="price | currency:'USD':'symbol':'4.2-2'"></span>
+     <span [innerHTML]="price"></span>
 
 </div>

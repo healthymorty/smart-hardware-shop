@@ -1,20 +1,38 @@
 @import '../../../styling/mixins.scss';
 
 :host(input-comp) {
-	//border: 1px solid red;
-	border-radius: 20px;
 	height: 100%;
     width: 100%;
-	label {
-		padding: 8px;
-	}
+	//border-radius: 40px;
+	/*&.edit {
+		background-color: rgba(0, 0, 0, 0.4); //temp
+		border-bottom: 1px solid rgba(255, 255, 255, 0.2); //temp
+		box-shadow: 0 0px 2px rgba(0, 0, 0, 0.5) inset;; //temp
+		height: 40px;
+		overflow: hidden;
+		::ng-deep label.input-label {
+			position: relative;
+			.icon-container {
+				//background-color: $primary;
+				border-radius: 50%;
+				height: 40px;
+				position: absolute;
+				text-align: center;
+				top: 0;
+				width: 40px;
+				i.icon {
+					padding: 12px 0;
+				}
+			}
+		}
+		
+	}*/
 	input {
 		background-color: transparent;
 		border: medium none;
 		color: $textColor;
 		height: 100%;
 		outline: none;
-		text-indent: 10px;
 		width: 100%;
 	}
 }   

@@ -2,13 +2,7 @@ import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output, V
 
 import { MatDialogRef, MAT_DIALOG_DATA }	from '@angular/material/dialog';
 
-import { 
-
-	InputComponent,
-	
-	PagingComponent 
-
-}	from '@atoms/index';
+import { CheckboxComponent }	from '@atoms/checkbox';
 
 import { 
 
@@ -16,21 +10,13 @@ import {
 	
 	IProduct,
 
+	ISettings,
+
 	IUser
 
 }	from '@interfaces/index';
 
-import { 
-	
-	QueryService,
-
-	URLManagerService
-
-}	from '@services/index';
-
-import { Paging }				from '@classes/Paging.class';
-
-import { ProductCardComponent } from '@organisms/index';
+import { QueryService }			from '@services/Query.service';
 
 @Component({
 
@@ -44,55 +30,17 @@ import { ProductCardComponent } from '@organisms/index';
 
 export class StoreFrontComponent implements OnInit {
 
-	@ViewChild('bottomPagingComp') bottomPagingComp?: PagingComponent;
+	public order?:			IOrder;
 
-	@ViewChild('searchInputComp') searchInputComp?:	InputComponent;
+	public products:		IProduct[]	= [];
 
-	@ViewChild('topPagingComp') topPagingComp?: PagingComponent;
-
-	public cartOrder?:		IOrder;
-
-	public cartOrderProductIDMap?: { [key: number]: IProduct }	 = {};
-
-	public page				= new Paging(this.getNewPage.bind(this));
-
-	public products?:		IProduct[];
-
-	get pageNum(): number {
-
-		return (this._URLManagerService.hasQueryParam('page')) ?
-
-			+this._URLManagerService.getQueryParam('page') : 1;
-
-	}
-
-	public pageSize			= 25;
-
-	public recommendeds?:	IProduct[];
-
-	public searchTimer?:	any;
-
-	public searchText		= this.searchValue;
-
-	get searchValue(): string | undefined {
-
-		const searchValue	= (this._URLManagerService.hasQueryParam('search')) ?
-		
-			this._URLManagerService.getQueryParam('search') : undefined;
-
-		return searchValue;
-
-	}
-
-	public querysTotalRowCount?:	number;
+	public recommendeds:	IProduct[]	= [];
 
 	public user?:			IUser;
 
 	constructor(
 
-		private _queryService:		QueryService,
-
-		private _URLManagerService:	URLManagerService
+		private _queryService:		QueryService
 
 	) {}
 
@@ -100,172 +48,28 @@ export class StoreFrontComponent implements OnInit {
 
 		await this.setUser();
 
-		await this.setCartOrder();
-
-		this.setCartOrderMap();
+		this.setOrder();
 
 		this.setRecommendeds();
 
-		this.onPage();
+		this.setProducts();
 
 	}
 
-	public addItemToCart(productCardComp: ProductCardComponent): void {
-
-		if (!this.cartOrderProductIDMap![productCardComp.id!]) {
-			
-			this.cartOrderProductIDMap![productCardComp.id!]	= productCardComp.product;
-
-			this.cartOrder?.products.push(this.cartOrderProductIDMap![productCardComp.id!]);
-
-		}
-
-	}
-
-	public async getCartOrder(): Promise<IOrder> {
-
-		const dataOrder	= await this._queryService.callRest('GET', 'http://localhost:8080/carts/' + this.user!.id);
-
-		return dataOrder.response.body;
-
-	}
-
-	public getMultiProductIdQueryString(order: IOrder): string {
-
-		let multiProductIdQueryString	= '';
-
-		for (let product of order.products)
-
-			multiProductIdQueryString += 'id=' + product.id + '&&';
-
-		return (multiProductIdQueryString !== '') ? 
+	public async setOrder(): Promise<void> {
 		
-			multiProductIdQueryString.substring(0, multiProductIdQueryString.length-2) : '';
+		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/carts/' + this.user!.id);
+
+		this.order			= dataProducts.response.body;
 
 	}
+	
 
-	public async getNewPage(pageNum: number): Promise<IProduct[]> {
+	public async setProducts(): Promise<void> {
 
-		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products?' + this.getPageQueryString(pageNum));
+		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products');
 
-		this.setQuerysTotalRowCount(pageNum, dataProducts.response.headers.get('X-Total-Count'));
-
-		return [...dataProducts.response.body];
-
-	}
-
-	public getPageQueryString(pageNum: number): string {
-
-		const searchParam	= (this.searchValue) ? 'q=' + this.searchValue + '&' : '';
-
-		return searchParam + '_page='+ pageNum +'&_limit=' + this.pageSize;
-
-	}
-
-	public getProductIdMap(products: IProduct[]): { [key: number]: IProduct } {
-
-		const productIdMap: { [key: number]: IProduct }	= {};
-
-		for (let product of products) productIdMap[product.id] = product;
-
-		return productIdMap;
-
-	}
-
-	public async getSpecificProducts(queryString: string): Promise<IProduct[]> {
-
-		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products/?' + queryString);
-
-		return dataProducts.response.body;
-	}
-
-	public mergeOrderProductsWithProducts(order: IOrder, products: IProduct[]): IOrder {
-
-		const orderProducts	= [];
-
-		const productIdMap	= this.getProductIdMap(products);
-		
-		for (let product of order.products)
-
-			if (productIdMap[product.id])
-
-				orderProducts.push({...product, ...productIdMap[product.id]});
-
-		order.products		= [...orderProducts];
-
-		return order;
-
-	}
-
-	public async onPage(pageNum = this.pageNum): Promise<void> {
-
-		this.updatePagingComp(pageNum);
-
-		const dataProducts	= await this.page.getPage(pageNum);
-
-		this.products		= [];
-
-		setTimeout(() => {
-
-			this.products	= [...dataProducts];
-
-		}, 0);	
-
-	}
-
-	public onQuantityUpdated(productCardComp: ProductCardComponent): void {
-
-		if (!this.cartOrderProductIDMap![productCardComp.id!])
-
-			this.addItemToCart(productCardComp);
-
-		this.cartOrderProductIDMap![productCardComp.id!].quantity	= productCardComp.quantity;
-
-	}
-
-	public async onSearch(): Promise<void> {
-
-		(this._URLManagerService.hasQueryParam('search') && !this.searchInputComp!.isValid) ?
-
-				this._URLManagerService.clearQueryParam('search') :
-				
-				this._URLManagerService.updateURLFromParams({search: this.searchInputComp!.text});
-
-		clearTimeout(this.searchTimer);
-
-		this.searchTimer	= setTimeout(async () => {
-			
-			this.page.clear();
-
-			this.onPage(1);
-
-		}, 2000);
-
-	}
-
-	public async setCartOrder(): Promise<void> {
-		
-		const order			= await this.getCartOrder();
-
-		const multiProductIdQueryString	= this.getMultiProductIdQueryString(order);
-
-		const dataProducts	= await this.getSpecificProducts(multiProductIdQueryString);
-
-		this.cartOrder		= this.mergeOrderProductsWithProducts(order, dataProducts);
-
-	}
-
-	public setCartOrderMap(): void {
-
-		const cartOrderProductIDMap: { [key: number]: IProduct } = {};
-
-		if (this.cartOrder && this.cartOrder.products.length > 0)
-
-			for (let product of this.cartOrder.products)
-
-				cartOrderProductIDMap[product.id] = product;
-
-		this.cartOrderProductIDMap = {...cartOrderProductIDMap};
+		this.products		= [...dataProducts.response.body];
 
 	}
 
@@ -274,13 +78,6 @@ export class StoreFrontComponent implements OnInit {
 		const dataRecommendeds	= await this._queryService.callRest('GET', 'http://localhost:8080/recommendeds');
 
 		this.recommendeds		= [...dataRecommendeds.response.body];
-
-	}
-
-	public setQuerysTotalRowCount(pageNum: number, HeadersXTotalCount: number): void {
-
-		if (!this.querysTotalRowCount) this.querysTotalRowCount	= HeadersXTotalCount;
-
 	}
 
 	public async setUser(): Promise<void> {
@@ -288,14 +85,6 @@ export class StoreFrontComponent implements OnInit {
 		const dataUser	= await this._queryService.callRest('GET', 'http://localhost:8080/users/1');
 
 		this.user		= dataUser.response.body;
-
-	}
-
-	public updatePagingComp(pageNum: number): void {
-
-		if (this.topPagingComp!.pageNum !== pageNum) this.topPagingComp!.pageNum = pageNum;
-
-		if (this.bottomPagingComp!.pageNum !== pageNum) this.bottomPagingComp!.pageNum = pageNum;
 
 	}
 

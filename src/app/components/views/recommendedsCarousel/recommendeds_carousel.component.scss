@@ -1,34 +1,4 @@
 @import '../../../styling/mixins.scss';
 
 :host(recommendeds-carousel) {
-    ::ng-deep mat-carousel {
-        height: 100% !important;
-        .carousel {
-            height: 100% !important;
-            .carousel-list {
-                height: 100% !important;
-                padding: 0 !important;
-                .carousel-slide {
-                    height: 100% !important;
-                    padding: 0 !important;
-                }
-            }
-            button {
-                &:hover {
-                    mat-icon {
-                        color: rgba(255, 255, 255, 1);
-                    }
-                }
-                &.mat-button-disabled, &.mat-mini-fab:hover {
-                    background-color: rgba(255, 255, 255, 1) !important;
-                }
-                &.mat-mini-fab.mat-accent {
-                    background-color: rgba(255, 255, 255, 0.5);
-                }
-                .mat-icon {
-                    color: rgba(255, 255, 255, 0.5);
-                }
-            }
-        }
-    }
 }
