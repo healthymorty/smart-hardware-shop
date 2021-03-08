@@ -20,9 +20,5 @@ export class ProductListItemComponent implements OnInit {
 	
 	constructor() { }
 
-	ngOnInit() {
-
-		console.log(this.image);
-
-	}
+	ngOnInit() {}
 }	

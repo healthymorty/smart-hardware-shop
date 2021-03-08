@@ -1,1 +1,3 @@
-export { UniqueIDGenerator } 	from '@classes/UniqueIDGenerator.class';
+export { Paging }				from '@classes/Paging.cless';
+
+export { UniqueIDGenerator }	from '@classes/UniqueIDGenerator.class';

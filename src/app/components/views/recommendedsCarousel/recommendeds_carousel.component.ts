@@ -18,10 +18,6 @@ export class RecommendedsCarouselComponent implements OnInit {
 
 	constructor() { }
 
-	ngOnInit() {
-
-		console.log(this.recommendeds);
-
-	}
+	ngOnInit() {}
 
 }	

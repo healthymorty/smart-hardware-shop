@@ -10,13 +10,17 @@ import {
 	
 	IProduct,
 
-	ISettings,
-
 	IUser
 
 }	from '@interfaces/index';
 
-import { QueryService }			from '@services/Query.service';
+import { 
+	
+	QueryService,
+
+	URLManagerService
+
+}	from '@services/index';
 
 @Component({
 
@@ -36,15 +40,21 @@ export class StoreFrontComponent implements OnInit {
 
 	public recommendeds?:	IProduct[];
 
+	public pageNum?:		number;
+
 	public user?:			IUser;
 
 	constructor(
 
-		private _queryService:		QueryService
+		private _queryService:		QueryService,
+
+		private _URLManagerService:	URLManagerService
 
 	) {}
 
 	async ngOnInit(): Promise<void> {
+
+		this.setPageNum();
 
 		await this.setUser();
 
@@ -125,6 +135,15 @@ export class StoreFrontComponent implements OnInit {
 
 	}
 	
+	public setPageNum(): void {
+
+		const URLPageNum	= (this._URLManagerService.hasQueryParam('page')) ? 
+
+			this._URLManagerService.getQueryParam('page') : 1;
+
+		this.pageNum	= +URLPageNum;
+
+	}
 
 	public async setProducts(): Promise<void> {
 		console.log(await this._queryService.callRest('GET', 'http://localhost:8080/products?id=1&&2'));
@@ -139,7 +158,7 @@ export class StoreFrontComponent implements OnInit {
 		const dataRecommendeds	= await this._queryService.callRest('GET', 'http://localhost:8080/recommendeds');
 
 		this.recommendeds		= [...dataRecommendeds.response.body];
-		console.log(this.recommendeds);
+
 	}
 
 	public async setUser(): Promise<void> {

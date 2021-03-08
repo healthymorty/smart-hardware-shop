@@ -1,0 +1,109 @@
+<div fxFlex fxLayout="column">
+
+	<span fxFlex fxLayout="row">Showing {{range}} of {{itemName}}s</span>
+
+</div>
+
+<div fxFlex fxLayout="row">
+
+	<div class="page-jump fa fa-angle-double-left" 
+	
+		 fxFlex="none" 
+		 
+		 fxLayout="column"
+
+		 *ngIf="Object.keys(pageSetMap).length > 0 && pageNum > 1"
+		 
+		 (click)="onJumpToBeginning()"><div>
+		 
+	<div class="page-back fa fa-chevron-left" 
+	
+		 fxFlex="none" 
+		 
+		 fxLayout="column"
+
+		 *ngIf="pageNum > 1"
+		 
+		 (click)="onPageBackward()"><div>
+
+	<div class="page" 
+	
+		 fxFlex="none" 
+		 
+		 fxLayout="column" 
+		 
+		 *ngIf="pageNum && pageSetMap[pageSetNum][0]"
+		 
+		 [ngClass]="{'selected': pageSetMap[pageSetNum][0] === pageNum}"
+		 
+		 (click)="onPage(pageSetMap[pageSetNum][0])">{{pageSetMap[pageSetNum][0]}}</div>
+
+	<div class="page" 
+	
+		 fxFlex="none" 
+		 
+		 fxLayout="column" 
+		 
+		 *ngIf="pageNum && pageSetMap[pageSetNum][1]"
+		 
+		 [ngClass]="{'selected': pageSetMap[pageSetNum][1] === pageNum}"
+		 
+		 (click)="onPage(pageSetMap[pageSetNum][1])">{{pageSetMap[pageSetNum][1]}}</div>
+
+	<div class="page" 
+	
+		 fxFlex="none" 
+		 
+		 fxLayout="column" 
+		 
+		 *ngIf="pageNum && pageSetMap[pageSetNum][2]"
+		 
+		 [ngClass]="{'selected': pageSetMap[pageSetNum][2] === pageNum}"
+		 
+		 (click)="onPage(pageSetMap[pageSetNum][2])">{{pageSetMap[pageSetNum][2]}}</div>
+
+	<div class="page" 
+	
+		 fxFlex="none" 
+		 
+		 fxLayout="column" 
+		 
+		 *ngIf="pageNum && pageSetMap[pageSetNum][3]"
+		 
+		 [ngClass]="{'selected': pageSetMap[pageSetNum][3] === pageNum}"
+		 
+		 (click)="onPage(pageSetMap[pageSetNum][3])">{{pageSetMap[pageSetNum][3]}}</div>
+
+	<div class="page" 
+	
+		 fxFlex="none" 
+		 
+		 fxLayout="column" 
+		 
+		 *ngIf="pageNum && pageSetMap[pageSetNum][4]"
+		 
+		 [ngClass]="{'selected': pageSetMap[pageSetNum][4] === pageNum}"
+		 
+		 (click)="onPage(pageSetMap[pageSetNum][4])">{{pageSetMap[pageSetNum][4]}}</div>
+
+	<div class="page-forward fa fa-chevron-right" 
+	
+		 fxFlex="none" 
+		 
+		 fxLayout="column"
+
+		 *ngIf="numberOfPages >= 5 && pageNum < totalItems"
+		 
+		 (click)="onPageForward()"><div>
+
+	<div class="page-jump fa fa-angle-double-right" 
+	
+		 fxFlex="none" 
+		 
+		 fxLayout="column"
+
+		 *ngIf="Object.keys(pageSetMap).length > 0 && pageNum !== totalItems"
+		 
+		 (click)="onJumpToEnd()"><div>
+
+</div>

@@ -23,6 +23,7 @@ import { AppComponent }			from './app.component';
 import { CheckboxComponent }			from '@atoms/checkbox/checkbox.component';
 import { InputComponent }				from '@atoms/inputComp/input.component';
 import { MoreComponent }				from '@atoms/more/more.component';
+import { PagingComponent }				from '@atoms/paging/paging.component';
 import { ProductListItemComponent }		from '@atoms/productListItem/product_list_item.component';
 import { ProgressBarComponent }			from '@atoms/progressBar/progress_bar.component';
 import { RWInputComponent }				from '@atoms/rwInputComp/rw_input.component';
@@ -64,6 +65,7 @@ import { BrowserAnimationsModule }		from '@angular/platform-browser/animations';
 		CheckboxComponent,
 		InputComponent,
 		MoreComponent,
+		PagingComponent,
 		ProductListItemComponent,
 		ProgressBarComponent,
 		RWInputComponent,

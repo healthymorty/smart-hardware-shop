@@ -8,6 +8,8 @@ export {
 
     MoreComponent,
 
+    PagingComponent,
+
     ProductListItemComponent,
 
     ProgressBarComponent,
