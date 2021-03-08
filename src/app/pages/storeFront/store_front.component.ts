@@ -22,6 +22,8 @@ import {
 
 }	from '@services/index';
 
+import { Paging }	from '@classes/paging.class';
+
 @Component({
 
 	selector: 'store-front',
@@ -36,11 +38,23 @@ export class StoreFrontComponent implements OnInit {
 
 	public cartOrder?:		IOrder;
 
+	public page				= new Paging(this.getNewPage.bind(this));
+
 	public products?:		IProduct[];
+
+	get pageNum(): number {
+
+		return (this._URLManagerService.hasQueryParam('page')) ?
+
+			this._URLManagerService.getQueryParam('page') : 1;
+
+	}
+
+	public pageSize			= 25;
 
 	public recommendeds?:	IProduct[];
 
-	public pageNum?:		number;
+	public totalProducts	= 1015;
 
 	public user?:			IUser;
 
@@ -54,20 +68,18 @@ export class StoreFrontComponent implements OnInit {
 
 	async ngOnInit(): Promise<void> {
 
-		this.setPageNum();
-
 		await this.setUser();
 
 		this.setCartOrder();
 
 		this.setRecommendeds();
 
-		this.setProducts();
+		this.onPage();
 
 	}
 
 	public async getCartOrder(): Promise<IOrder> {
-
+		console.log(this.user);
 		const dataOrder	= await this._queryService.callRest('GET', 'http://localhost:8080/carts/' + this.user!.id);
 
 		return dataOrder.response.body;
@@ -85,6 +97,14 @@ export class StoreFrontComponent implements OnInit {
 		return (multiProductIdQueryString !== '') ? 
 		
 			multiProductIdQueryString.substring(0, multiProductIdQueryString.length-2) : '';
+
+	}
+
+	public async getNewPage(pageNum: number): Promise<IProduct> {
+
+		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products?_page='+ pageNum +'&_limit=' + this.pageSize);
+
+		return [...dataProducts.response.body];
 
 	}
 
@@ -116,8 +136,22 @@ export class StoreFrontComponent implements OnInit {
 
 	}
 
-	public async searchProducts(queryString: string): Promise<IProduct[]> {
+	public async onPage(pageNum = this.pageNum): Promise<void> {
 
+		const dataProducts	= await this.page.getPage(pageNum);
+		console.log(dataProducts);
+		this.products		= [];
+
+		setTimeout(() => {
+
+			this.products	= [...dataProducts];
+
+		}, 0);	
+
+	}
+
+	public async searchProducts(queryString: string): Promise<IProduct[]> {
+		console.log(queryString);
 		const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products/?' + queryString);
 
 		return dataProducts.response.body;
@@ -132,24 +166,6 @@ export class StoreFrontComponent implements OnInit {
 		const dataProducts	= await this.searchProducts(multiProductIdQueryString);
 
 		this.cartOrder		= this.mergeOrderProductsWithProducts(order, dataProducts);
-
-	}
-	
-	public setPageNum(): void {
-
-		const URLPageNum	= (this._URLManagerService.hasQueryParam('page')) ? 
-
-			this._URLManagerService.getQueryParam('page') : 1;
-
-		this.pageNum	= +URLPageNum;
-
-	}
-
-	public async setProducts(): Promise<void> {
-		console.log(await this._queryService.callRest('GET', 'http://localhost:8080/products?id=1&&2'));
-		//const dataProducts	= await this._queryService.callRest('GET', 'http://localhost:8080/products');
-
-		this.products		= []; //[...dataProducts.response.body];
 
 	}
 

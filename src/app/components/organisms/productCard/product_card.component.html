@@ -6,11 +6,11 @@
 
 <div class="product-image"
 	 
-	 fxFlex
+	 fxFlex="none"
 	 
-	 fxLayout="row">
-	
-	 <img *ngIf="defaultImage" [src]="defaultImage" [alt]="name">
+	 fxLayout="column"
+	 
+	 [ngStyle]="{'background-image': 'url(' + defaultImage + ')'}">
 
 	 <i class="fa fa-store" *ngIf="!defaultImage"></i>
 	
@@ -18,11 +18,11 @@
 
 <div class="product-context-content"
 
-	 fxFlex
+	 fxFlex="none"
 	 
 	 fxLayout="column">
 	
-	<div class="stats" fxFlex fxLayout="row">
+	<div class="stats" fxFlex="none" fxLayout="row">
 
 		<div class="price" fxFlex fxLayout="row">
 
@@ -44,7 +44,7 @@
 
 	<div class="description" 
 		
-		 fxFlex 
+		 fxFlex="none" 
 		 
 		 fxLayout="row"
 		 

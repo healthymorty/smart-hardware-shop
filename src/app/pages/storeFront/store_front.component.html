@@ -6,11 +6,11 @@
 	 
 	 fxLayout="row">
 
-	<div class="left-menu-panel" 
+	<!--<div class="left-menu-panel" 
 	
-		 fxFlex="25"
+		 fxFlex="20"
 		 
-		 fxLayout="column"></div>
+		 fxLayout="column"></div>-->
 
 	<div class="middle-panel" 
 	
@@ -40,25 +40,37 @@
 
 		</div>
 
-		<div class="product-list-view" fxFlex fxLayout="row wrap">
+		<div class="product-list-view" fxFlex fxLayout="column">
 
-			<product-card fxFlex 
-			
-						  fxLayout="column"
-						  
-						  *ngFor="let product of products"
-						  
-						  [description]="product.description"
-	
-						  [defaultImage]="product.defaultImage"
+			<div class="product-container" fxFlex fxLayout="row wrap">
 
-						  [discount]="product.discount"
+				<product-card fxFlex="none"
+				
+							  fxLayout="column"
+							  
+							  *ngFor="let product of products"
+							  
+							  [description]="product.description"
+		
+							  [defaultImage]="product.defaultImage"
 
-						  [images]="product.images"
+							  [discount]="product.discount"
 
-						  [name]="product.name"
-						
-						  [price]="product.price"></product-card>
+							  [images]="product.images"
+
+							  [name]="product.name"
+							  
+							  [price]="product.price"></product-card>
+
+			</div>
+
+			<paging [itemName]="'Product'"
+								
+					[pageSize]="pageSize"
+					
+					[totalItems]="totalProducts"
+					
+					(page)="onPage($event)"></paging>
 
 		</div>
 		

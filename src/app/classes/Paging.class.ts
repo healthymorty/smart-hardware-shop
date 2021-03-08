@@ -4,7 +4,7 @@ export class Paging {
 
 	constructor(
 
-		public newPage: () => Promise<any>
+		public getNewPage: (pageNum: number) => Promise<any>
 
 	) {}
 
@@ -12,7 +12,7 @@ export class Paging {
 
 		if (!this.pageMap[pageNum]) 
 			
-			this.pageMap[pageNum]	= await this.newPage();
+			this.pageMap[pageNum]	= await this.getNewPage(pageNum);
 
 		return this.pageMap[pageNum];
 

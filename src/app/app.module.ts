@@ -49,6 +49,7 @@ import { GlobalService }				from '@services/Global.service';
 import { LocalStorageService }			from '@services/LocalStorage.service';
 import { MaskService }					from '@services/Mask.service';
 import { QueryService }					from '@services/Query.service';
+import { URLManagerService }			from '@services/URLManager.service';
 
 /*Animations*/
 import { BrowserAnimationsModule }		from '@angular/platform-browser/animations';
@@ -122,7 +123,9 @@ import { BrowserAnimationsModule }		from '@angular/platform-browser/animations';
 
 		MaskService,
 
-		QueryService
+		QueryService,
+
+		URLManagerService
 
 	],
 

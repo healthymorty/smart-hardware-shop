@@ -32,13 +32,15 @@ export class PagingComponent {
 
 		this.setRange();
 
-		this._URLManagerService.updateURLFromParams({page: pageNum});
+		this.setURLPageNumber();
 
 	}
 
 	@Input() pageSize		= 24;
 
 	@Input() totalItems?: 	number;
+
+	@Output() page:	EventEmitter<number> = new EventEmitter<number>();
 
 	public numberOfPages	= 0;
 
@@ -58,13 +60,51 @@ export class PagingComponent {
 
 	ngOnInit() {
 
+		if (this.pageNum === undefined)
+
+			this.pageNum	= (this._URLManagerService.hasQueryParam('page')) ?
+
+				this._URLManagerService.getQueryParam('page') : 1;
+
 		this.setPageSetMap();
+
+	}
+
+	public onJumpToBeginning(): void {
+
+		this.page.emit(this.pageSetMap[1][0]);
+
+	}
+
+	public onJumpToEnd(): void {
+
+		const pageSetLength	= Object.keys(this.pageSetMap).length;
+
+		this.page.emit(this.pageSetMap[pageSetLength][4]);
 
 	}
 
 	public onPage(pageNum: number): void {
 
 		this.pageNum	= pageNum;
+
+	}
+
+	public onPageBackward(): void {
+
+		this.page.emit(this.pageNum - 1);
+
+	}
+
+	public onPageForward(): void {
+
+		this.page.emit(this.pageNum + 1);
+
+	}
+
+	public onPageSizeSelected(size: number): void {
+
+		this.pageSize	= size;
 
 	}
 
@@ -107,6 +147,16 @@ export class PagingComponent {
 		const pageCount	= this.pageNum! * this.pageSize;
 
 		this.range		= (pageCount + 1 - this.pageSize) + ' - ' + pageCount;
+
+	}
+
+	public setURLPageNumber(): void {
+
+		const hasURLPageNumber	= this._URLManagerService.hasQueryParam('page');
+
+		if (!hasURLPageNumber || hasURLPageNumber && this._URLManagerService.getQueryParam('page') !== this.pageNum) 
+
+			this._URLManagerService.updateURLFromParams({page: this.pageNum.toString()});
 
 	}
 

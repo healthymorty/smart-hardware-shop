@@ -6,7 +6,9 @@ import { StoreFrontComponent } from '@pages/storeFront/store_front.component';
 
 const routes: Routes = [
 
-	{ path: 'store-front', component:  StoreFrontComponent }
+	//{ path: '', data: { pageName: 'store-front' }, redirectTo: 'store-front', pathMatch: 'full' },
+
+	{ path: 'store-front', component:  StoreFrontComponent, data: { pageName: 'store-front', queryParams: {} } }
 	
 ];
 
