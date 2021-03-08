@@ -68,7 +68,9 @@
 
 			<div class="product-container" fxFlex fxLayout="row wrap">
 
-				<product-card fxFlex="none"
+				<product-card #productCardComp
+				
+							  fxFlex="none"
 				
 							  fxLayout="column"
 							  
@@ -80,11 +82,15 @@
 
 							  [discount]="product.discount"
 
+							  [id]="product.id"
+
 							  [images]="product.images"
 
 							  [name]="product.name"
 							  
-							  [price]="product.price"></product-card>
+							  [price]="product.price"
+							  
+							  (addItemToCart)="onAddItemToCart(productCardComp)"></product-card>
 
 			</div>
 

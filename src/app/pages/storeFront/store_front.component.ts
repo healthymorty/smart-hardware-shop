@@ -28,7 +28,9 @@ import {
 
 }	from '@services/index';
 
-import { Paging }	from '@classes/Paging.class';
+import { Paging }				from '@classes/Paging.class';
+
+import { ProductCardComponent } from '@organisms/index';
 
 @Component({
 
@@ -176,6 +178,12 @@ export class StoreFrontComponent implements OnInit {
 		order.products		= [...orderProducts];
 
 		return order;
+
+	}
+
+	public onAddItemToCart(productCardComp: ProductCardComponent): void {
+
+		this.cartOrder?.products.push(productCardComp.product);
 
 	}
 

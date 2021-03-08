@@ -32,11 +32,31 @@
 
 		</div>
 
-		<div class="discount" fxFlex fxLayout="row">
+		<div class="discount" fxFlex="none" fxLayout="row">
 
 			<i class="fa fa-tag"></i>
 
-			<span>{{discount}}</span>
+			<span>{{discount}} %</span>
+
+		</div>
+
+		<div class="actions" 
+		
+			 fxFlex 
+			 
+			 fxLayout="row" 
+			
+			 fxLayoutAlign="end center">
+
+			<div class="fa fa-cart-arrow-down" 
+			
+				 fxFlex="none" 
+				 
+				 fxLayout="column" 
+				 
+				 fxLayoutAlign="center center"
+				 
+				 (click)="onAddToCart()"></div>
 
 		</div>
 
