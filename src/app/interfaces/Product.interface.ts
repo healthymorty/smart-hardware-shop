@@ -1,14 +1,14 @@
 export interface IProduct {
 
-	description:	string;
+	description?:	string;
 	
 	defaultImage:	string;
 
-	discount:		number;
+	discount?:		number;
 
 	id:				number;
 
-	images:			string[];
+	images?:			string[];
 
 	name:			string;
 	

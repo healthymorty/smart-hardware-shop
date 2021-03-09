@@ -197,6 +197,12 @@ export class StoreFrontComponent implements OnInit {
 
 	}
 
+	public onCartQuantityUpdated($event: IProduct): void {
+
+		this.cartOrderProductIDMap![$event.id!].quantity	= $event.quantity;
+
+	}
+
 	public async onPage(pageNum = this.pageNum): Promise<void> {
 
 		this.updatePagingComp(pageNum);

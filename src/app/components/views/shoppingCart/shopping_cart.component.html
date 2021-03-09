@@ -18,19 +18,25 @@
 	 
 	 *ngIf="order">
 
-	 <product-list-item fxFlex="none" 
+	 <product-list-item #productListItemComp
+	 
+	 					fxFlex="none" 
 	 
 	 					fxLayour="row"
 
 						*ngFor="let product of order!.products"
-						 
+						
+						[id]="product.id"
+						
 						[name]="product.name"
 						
 						[image]="product.defaultImage"
 						
 						[price]="product.price"
 						
-						[quantity]="product.quantity"></product-list-item>
+						[quantity]="product.quantity"
+						
+						(quantityUpdated)="onQuantityUpdated($event)"></product-list-item>
 	
 </div>
 

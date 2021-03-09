@@ -1,49 +1,66 @@
-<div class="quantity" 
+<!--<div class="quantity" 
 
-     fxFlex="none"
-     
-     fxLayout="column" 
-     
-     fxLayoutAlign="center center">
+	 fxFlex="none"
+	 
+	 fxLayout="column" 
+	 
+	 fxLayoutAlign="center center">
 
-     <span [innerHTML]="quantity"></span>
+	 <span [innerHTML]="quantity"></span>
 
-</div>
+</div>-->
+
+<add-to-cart #addToCartComp
+
+			 fxFlex="none"
+
+			 fxLayout="row"
+
+			 [ngClass]="{'overlay': mouseoverElem}"
+
+			 [quantity]="_quantity"
+
+			 (mouseenter)="mouseoverElem = true"
+
+			 (mouseleave)="mouseoverElem = false"
+			 
+			 (quantityUpdated)="onQuantityUpdated()"></add-to-cart>
+
 
 <div class="product-image" 
 
-     fxFlex="none"
-     
-     fxLayout="column"
+	 fxFlex="none"
+	 
+	 fxLayout="column"
 
-     fxLayoutAlign="center center"
-     
-     [ngStyle]="{'background-image': 'url(' + image + ')'}">
+	 fxLayoutAlign="center center"
+	 
+	 [ngStyle]="{'background-image': 'url(' + image + ')'}">
 
-     <i class="fa fa-store" *ngIf="!image"></i>
+	 <i class="fa fa-store" *ngIf="!image"></i>
 
 </div>
 
 <div class="name" 
 
-     fxFlex 
-     
-     fxLayout="column" 
-     
-     fxLayoutAlign="center start">
+	 fxFlex 
+	 
+	 fxLayout="column" 
+	 
+	 fxLayoutAlign="center start">
 
-     <span [innerHTML]="name"></span>
+	 <span [innerHTML]="name"></span>
 
 </div>
 
 <div class="price" 
 
-     fxFlex="none"
-     
-     fxLayout="column"
-     
-     fxLayoutAlign="center start">
+	 fxFlex="none"
+	 
+	 fxLayout="column"
+	 
+	 fxLayoutAlign="center start">
 
-     <span [innerHTML]="price | currency:'USD':'symbol':'4.2-2'"></span>
+	 <span [innerHTML]="price | currency:'USD':'symbol':'4.2-2'"></span>
 
 </div>

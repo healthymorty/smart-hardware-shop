@@ -10,7 +10,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 })
 
-export class AddeToCartComponent implements OnInit {
+export class AddToCartComponent implements OnInit {
 
 	public _quantity	= 0;
 

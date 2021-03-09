@@ -1,1 +1,1 @@
-export { CheckboxComponent } from '@atoms/checkbox/checkbox.component';
+export { AddToCartComponent } from '@atoms/addToCart/add_to_cart.component';

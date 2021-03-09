@@ -6,6 +6,21 @@
 		height: 40px;
 		width: 40px;
 	}
+	::ng-deep add-to-cart {
+		height: 40px;
+		margin: 0 8px 0 0;
+		width: 40px;
+		&.overlay {
+			.quantity-manager {
+				position: absolute !important;
+			}
+		}
+		.quantity-manager {
+			left: 0 !important; 
+			position: relative !important;
+			top: 0 !important;
+		}
+	}
 	.product-image {
 		background-size: cover;
 		background-repeat: no-repeat;

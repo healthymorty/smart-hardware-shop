@@ -1,4 +1,40 @@
-<div class="nav-bar" fxFlex="none" fxLayout="row"></div>
+<div class="nav-bar" 
+
+	 fxFlex="none" 
+	 
+	 fxLayout="row"
+	 
+	 fxLayoutAlign="end center">
+
+	<div class="profile-button" 
+		
+		 fxFlex="none"
+		
+		 fxLayout="row">
+
+		<div class="pic-wrap" 
+		
+			 fxLayout="column"
+			 
+			 fxLayoutAlign="center center">
+
+			<img src="https://media-exp1.licdn.com/dms/image/C4D03AQHaAGUoUeL-4Q/profile-displayphoto-shrink_400_400/0/1613405447422?e=1620864000&v=beta&t=t1MX5fp1Sday1n9YGLZsKsQaM34M4xxJ8-TBnDhiD84"/>
+
+		</div>
+
+		<div class="name" 
+		
+			 fxLayout="column" 
+				
+			 fxLayoutAlign="center center">
+
+			Jeremy Jones
+
+		</div>
+
+	</div>
+
+</div>
 
 <div class="main-content-container" 
 
@@ -128,7 +164,9 @@
 
 					   *ngIf="cartOrder"
 					   
-					   [order]="cartOrder"></shopping-cart>
+					   [order]="cartOrder"
+					   
+					   (quantityUpdated)="onCartQuantityUpdated($event)"></shopping-cart>
 		
 	</div>
 	

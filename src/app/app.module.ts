@@ -20,7 +20,7 @@ import { AppRoutingModule } 	from './app-routing.module';
 import { AppComponent }			from './app.component';
 
 /* Atoms */
-import { AddeToCartComponent }			from '@atoms/addToCart/add_to_cart.component';
+import { AddToCartComponent }			from '@atoms/addToCart/add_to_cart.component';
 import { CheckboxComponent }			from '@atoms/checkbox/checkbox.component';
 import { InputComponent }				from '@atoms/inputComp/input.component';
 import { MoreComponent }				from '@atoms/more/more.component';
@@ -64,7 +64,7 @@ import { BrowserAnimationsModule }		from '@angular/platform-browser/animations';
 		/* Pipes */
 
 		/* Atoms */
-		AddeToCartComponent,
+		AddToCartComponent,
 		CheckboxComponent,
 		InputComponent,
 		MoreComponent,

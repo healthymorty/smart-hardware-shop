@@ -2,7 +2,7 @@ export {
 
 	/* Atoms */
 
-	AddeToCartComponent,
+	AddToCartComponent,
 	
 	CheckboxComponent,
 

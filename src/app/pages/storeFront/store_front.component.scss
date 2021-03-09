@@ -8,23 +8,33 @@
 	position: relative;
 	width: 100%;
     .nav-bar {
-        //border: 1px solid red;
         height: 60px;
+        .profile-button {
+            margin: 0 24px 0 0;
+            .pic-wrap {
+                img {
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+                }
+            }
+            .name {
+                margin: 0 0 0 8px;
+            }
+        }
     }
     .main-content-container {
-        //border: 1px solid red;
+        overflow: hidden;
         .left-menu-panel {
-            //border: 1px solid red;
             
         }
         .middle-panel {
-            //border: 1px solid red;
+            overflow-y: scroll;
+            overflow-x: hidden;
             .banner {
-                //border: 1px solid red;
                 height: 200px;
             }
             .filter-bar {
-                //border: 1px solid red;
                 height: 40px;
                 padding: 0 0 0 16px;
                 position: relative;
@@ -35,9 +45,6 @@
                 }
             }
             .product-list-view{
-                //border: 1px solid red;
-                overflow-y: scroll;
-                overflow-x: hidden;
                 padding: 16px 0 16px 16px;
                 product-card {
                     margin: 0 16px 16px 0;
@@ -47,6 +54,5 @@
         }
     }
     .right-menu-panel {
-        //border: 1px solid red;
     }
 }

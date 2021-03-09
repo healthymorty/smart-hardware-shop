@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Inject, Input, OnInit, Output, ViewChild }		from '@angular/core';
 
-import { IOrder } from '@interfaces/index';
+import { IOrder, IProduct } from '@interfaces/index';
 
 @Component({
 
@@ -18,11 +18,19 @@ export class ShoppingCartComponent implements OnInit {
 
 	public total?:		number;
 
+	@Output() quantityUpdated: EventEmitter<IProduct> = new EventEmitter<IProduct>();
+
 	constructor() {}
 
 	ngOnInit() {
 
 		this.setTotal();
+
+	}
+
+	public onQuantityUpdated($event: IProduct): void {
+
+		this.quantityUpdated.emit($event);
 
 	}
 

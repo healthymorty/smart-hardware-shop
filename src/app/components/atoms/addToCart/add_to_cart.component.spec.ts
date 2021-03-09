@@ -2,19 +2,19 @@ import { ComponentFixture, TestBed }	from '@angular/core/testing';
 
 import { NO_ERRORS_SCHEMA }				from '@angular/compiler/src/core';
 
-import { AddeToCartComponent }			from './add_to_cart.component';
+import { AddToCartComponent }			from './add_to_cart.component';
 
-describe('AddeToCartComponent', () => {
+describe('AddToCartComponent', () => {
 	
-	let component:	AddeToCartComponent;
+	let component:	AddToCartComponent;
 	
-	let fixture:	ComponentFixture<AddeToCartComponent>;
+	let fixture:	ComponentFixture<AddToCartComponent>;
 
 	beforeEach(async () => {
 	
 		await TestBed.configureTestingModule({
 	
-			declarations:	[ AddeToCartComponent ],
+			declarations:	[ AddToCartComponent ],
 			
 			schemas:		[ NO_ERRORS_SCHEMA ]
 			
@@ -26,7 +26,7 @@ describe('AddeToCartComponent', () => {
 
 	beforeEach(() => {
 		
-		fixture		= TestBed.createComponent(AddeToCartComponent);
+		fixture		= TestBed.createComponent(AddToCartComponent);
 		
 		component	= fixture.componentInstance;
 		

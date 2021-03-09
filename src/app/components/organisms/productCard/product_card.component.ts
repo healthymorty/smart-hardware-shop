@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Inject, Input, Output, ViewChild }		from '@angular/core';
 
-import { AddeToCartComponent } from '@atoms/addToCart/add_to_cart.component';
+import { AddToCartComponent } from '@atoms/addToCart/add_to_cart.component';
 
 import { IProduct }	from '@interfaces/Product.interface'; 
 
@@ -50,7 +50,7 @@ export class ProductCardComponent {
 
 	@Output() quantityUpdated: 	EventEmitter<number> = new EventEmitter<number>();
 
-	@ViewChild('addToCartComp') addToCartComp?: AddeToCartComponent;
+	@ViewChild('addToCartComp') addToCartComp?: AddToCartComponent;
 
 	get product(): IProduct {
 
